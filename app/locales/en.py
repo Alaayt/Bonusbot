@@ -62,7 +62,7 @@ STRINGS = {
     ),
     "objection_generic_ack": "I totally understand, that's a fair question.",
     "loss_chasing_warning": "I notice you're talking about a previous loss. I can't recommend betting more to recover it — that's a risky pattern. If you'd like, I can share responsible gaming limits or connect you with dedicated support instead of continuing to bet right now.",
-    "no_profit_guarantee": "I can't guarantee you a profit — no betting operator honestly can. Betting carries real risk, and the bonus itself comes with usage conditions (it's usually not instantly withdrawable cash). What I can do is explain the offer accurately so you can decide with full information.",
+    "no_profit_guarantee": "Let me clarify something important: the bonus itself is real and guaranteed — if you meet the offer's conditions (like the minimum deposit), you genuinely receive it, that's documented by the company. What I can't guarantee is the outcome of the bet itself (win or lose) — that depends on luck and skill, and no one can honestly guarantee that. I can explain any offer's details accurately so you know exactly what you're getting.",
     "stop_marketing_confirm": "Promotional messages have been turned off for your account. I'm still here if you need help or an explanation.",
     "unclear_message": "I didn't quite catch that 🤔 Could you rephrase, or use the main menu:",
     "not_available_in_country": "Based on our current information, this offer might not be available in {country} — but final availability is confirmed inside your account after registration. Would you like an alternative offer instead?",
