@@ -40,3 +40,10 @@ def get_promotion(slug: str) -> Promotion | None:
 
 def get_by_category(category_prefix: str) -> list[Promotion]:
     return [p for p in get_presentable_promotions() if p.category.startswith(category_prefix)]
+
+
+def get_by_category_keywords(keywords: list[str]) -> list[Promotion]:
+    """يطابق أي كلمة مفتاحية كجزء من نص الفئة (وليس بادئة فقط) - فئات العروض بصيغة
+    <domain>_<type> مثل sports_deposit_bonus أو casino_weekly_deposit_bonus، فمطابقة
+    startswith على كلمة مثل "deposit_bonus" لا تعمل أبدًا."""
+    return [p for p in get_presentable_promotions() if any(k in p.category for k in keywords)]
