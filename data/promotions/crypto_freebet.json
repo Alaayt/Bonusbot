@@ -1,0 +1,67 @@
+{
+  "id": "promo_003",
+  "slug": "crypto_freebet",
+  "category": "crypto_cashback",
+  "names": {
+    "ar": "Crypto Freebet - استرداد نقدي 30% للعملات الرقمية",
+    "en": "Crypto Freebet - 30% Cashback",
+    "fr": "Crypto Freebet - Cashback 30%"
+  },
+  "status": "active",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["registered_users_using_crypto_deposits"],
+  "start_at": "2026-04-27T00:00:00+03:00",
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "weekly_cashback_promo_code",
+    "percentage": 30,
+    "based_on": "متوسط مبلغ الإيداعات الأسبوعية بالعملات الرقمية",
+    "min_cashback_eur": 0.44,
+    "max_cashback_eur": 260
+  },
+  "activation_steps": [
+    "التسجيل أو تسجيل الدخول",
+    "الموافقة على المشاركة في عروض المكافآت الرياضية (إعدادات الحساب - المكافآت)",
+    "الضغط على زر \"المشاركة\" في صفحة العرض",
+    "الإيداع بعملة مشفرة (5 EUR كحد أدنى) - 5 إيداعات على الأقل خلال الأسبوع، 3 منها في أيام مختلفة",
+    "يُضاف الاسترداد كرمز ترويجي كل يوم اثنين بناءً على نتائج الأسبوع السابق"
+  ],
+  "deposit_conditions": {
+    "min_deposit_eur": 5,
+    "eligible_methods": ["أي عملة مشفرة"],
+    "min_deposits_per_week": 5,
+    "min_deposits_different_days": 3,
+    "week_definition": "من الاثنين 00:00 إلى الأحد 23:59 (UTC+3)"
+  },
+  "betting_conditions": {
+    "accepted_bet_types": ["accumulator_only", "prematch_or_live"],
+    "min_selections_per_accumulator": 4,
+    "min_odds_per_selection": 1.6,
+    "excluded_bet_types": ["هانديكاب", "المجموع (توتال)"]
+  },
+  "casino_conditions": {},
+  "wagering_conditions": {
+    "rollover_multiplier": 1,
+    "wagering_period_hours": 24,
+    "note": "متطلب رهان واحد فقط بالشروط أعلاه؛ إذا لم يُستوفَ خلال 24 ساعة من إضافة الكود يُلغى"
+  },
+  "withdrawal_conditions": {},
+  "expiry_conditions": {
+    "validity_hours": 24,
+    "validity_from": "وقت إضافة الرمز الترويجي"
+  },
+  "disqualification_reasons": ["إساءة استخدام إستراتيجيات يعتبرها 1xBet مسيئة", "عدم تقديم وثائق KYC عند الطلب"],
+  "kyc_requirements": ["وثيقة هوية عند الطلب", "قد تُطلب صورة شخصية أو تحقق هاتفي"],
+  "important_warnings": ["متاح فقط للإيداعات بالعملات الرقمية تحديدًا (على عكس معظم عروض 1xBet الأخرى التي تستثني الكريبتو)"],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/rules/crypto-freebet",
+  "raw_source_file": "data/raw_sources/crypto_freebet.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا"
+}

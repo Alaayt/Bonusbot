@@ -1,0 +1,40 @@
+{
+  "id": "promo_017",
+  "slug": "beat_1xbet",
+  "category": "casino_deposit_bonus_1xgames",
+  "names": {"ar": "اهزم 1xBet", "en": "Beat 1xBet", "fr": "Battez 1xBet"},
+  "status": "scheduled",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["active_users_with_account_transaction"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {"type": "deposit_match_1xgames_only", "percentage": 100, "max_amount_eur": 300},
+  "activation_steps": [
+    "تسجيل الدخول",
+    "إيداع 2€ أو أكثر يوم الإثنين (تاريخ الجولة الحالية: 08/10/2026 حسب النص المستلم)",
+    "تُضاف المكافأة تلقائيًا إذا اكتمل الملف الشخصي وتم تفعيل الهاتف"
+  ],
+  "deposit_conditions": {"min_deposit_eur": 2, "specific_day": "الإثنين (تاريخ الجولة الحالية غير مؤكد كثابت أسبوعي)"},
+  "betting_conditions": {},
+  "casino_conditions": {
+    "wagering_scope": "قسم 1xGames فقط",
+    "excluded_games": ["PF Pokerlight", "Lucky Wheel", "African Roulette", "Crown & Anchor", "DerbyRacing", "Roulette", "Apple Of Fortune", "Witch: Game Of Thrones", "Dragon's Gold", "Swamp Land", "Eastern nights", "Minesweeper", "Kamikaze", "Island", "Egg Catcher", "Royal feast", "Cyber2077", "Hi-lo Triple Chance", "Cases", "Crash", "Jackpot Game", "Respin Slot"]
+  },
+  "wagering_conditions": {"rollover_multiplier": 30, "wagering_period_hours": 24},
+  "withdrawal_conditions": {"rule": "إن سحبت قبل الإيداع، لن تُضاف المكافأة"},
+  "expiry_conditions": {"note": "تُلغى المكافأة إذا لم يُستوفَ الرهان خلال 24 ساعة"},
+  "disqualification_reasons": ["السحب قبل الإيداع", "عدم النشاط (بدون معاملات على الحساب)"],
+  "kyc_requirements": ["تطبق الشروط العامة"],
+  "important_warnings": ["تاريخ \"الإثنين 08/10/2026\" في النص المستلم غير مؤكد إن كان جولة واحدة أو متكررًا أسبوعيًا - راجع تقرير التدقيق", "معطّل لعملات الكريبتو بدون استثناءات"],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/promotions/landing-beatus",
+  "raw_source_file": "data/raw_sources/beat_1xbet.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا - تاريخ الجولة يحتاج تأكيد التكرار"
+}

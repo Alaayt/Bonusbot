@@ -1,0 +1,9 @@
+SOURCE_URL: https://1xbet.fi/ar/promotions/chick-point
+RECEIVED_FROM: user (لصق يدوي)
+RECEIVED_AT: 2026-08-06
+CONFLICT FLAG: العنوان الأصلي في قائمة الروابط هو "Chick Point" لكن المحتوى المستلم من هذا الرابط عنوانه "Esports World Cup 2026" (محتوى ضخم عن بطولات CS الرياضية الإلكترونية مع جوائز وسحوبات متعددة على مدار 2026). إما أن:
+(أ) رابط chick-point تم إعادة استخدامه/إعادة توجيهه لعرض مختلف تمامًا من قبل 1xBet، أو
+(ب) حدث خطأ عند النسخ من طرف المستخدم.
+تم تخزين المحتوى المستلم تحت slug "esports_world_cup_2026" بدل "chick_point" لتجنب الخلط، وتُرك عرض "Chick Point" الأصلي بحالة verification_status=unknown إلى حين تأكيد المستخدم أي المحتويين هو الصحيح لأي رابط.
+---
+[المحتوى الكامل محفوظ في data/raw_sources/esports_world_cup_2026.txt]

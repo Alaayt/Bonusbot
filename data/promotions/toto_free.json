@@ -1,0 +1,46 @@
+{
+  "id": "promo_014",
+  "slug": "toto_free",
+  "category": "sports_prediction_game",
+  "names": {"ar": "TOTO المجاني", "en": "Free TOTO", "fr": "TOTO gratuit"},
+  "status": "active",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["registered_users_18_plus"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "prediction_points",
+    "table": {"8_correct": 100, "9_correct": 250, "10_correct": 1000, "11_correct": 3000, "12_correct": 7000},
+    "unit": "نقاط مكافأة (تُستخدم في متجر البروموكود)"
+  },
+  "activation_steps": [
+    "تقديم توقع مجاني لنتائج 12 حدثًا (1/2/x) قبل بداية أول مباراة",
+    "تأكيد التوقع بوضع رهان على حدث رياضي بفرص 2 أو أعلى قبل بدء السحب",
+    "انتظار السحب اليومي",
+    "تُضاف النقاط لحساب متجر البروموكود خلال ساعة من انتهاء آخر مباراة TOTO"
+  ],
+  "deposit_conditions": {},
+  "betting_conditions": {
+    "confirmation_bet_min_odds": 2.0,
+    "note": "لا تُحتسب الرهانات بالبروموكود/نقاط المكافأة أو المتقدمة/المباعة/المستردة بفرص 1.00 أو رهانات النظام كتأكيد للتوقع",
+    "max_predictions_per_day": 1
+  },
+  "casino_conditions": {},
+  "wagering_conditions": {},
+  "withdrawal_conditions": {},
+  "expiry_conditions": {},
+  "disqualification_reasons": ["تاريخ إساءة أو احتيال أو مراجحة (arbitrage)", "أقل من 18 عامًا", "أكثر من حساب لكل عميل"],
+  "kyc_requirements": ["قد تُطلب بطاقة هوية قبل إضافة أي رهان مجاني"],
+  "important_warnings": ["ينطبق على الحساب الأول للعميل فقط ولا يشمل الحسابات اللاحقة", "لا يُستخدم بالتوازي مع عروض أخرى", "معطّل لعملات الكريبتو بدون استثناءات"],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/rules/toto_free",
+  "raw_source_file": "data/raw_sources/toto_free.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا (الحد الأدنى لمبلغ رهان التأكيد غير مذكور رقميًا)"
+}

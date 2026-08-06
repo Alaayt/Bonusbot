@@ -1,0 +1,44 @@
+{
+  "id": "promo_007",
+  "slug": "slot_ten_deposit",
+  "category": "casino_deposit_bonus",
+  "names": {
+    "ar": "الولاء يؤتي ثماره - بونص الإيداع العاشر (100%)",
+    "en": "Loyalty Pays Off - 10th Deposit Bonus (100%)",
+    "fr": "La fidélité paie - Bonus 10e dépôt (100%)"
+  },
+  "status": "active",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["existing_users_on_10th_deposit"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {"type": "deposit_match", "percentage": 100, "max_amount_eur": 1000},
+  "activation_steps": [
+    "إكمال الملف الشخصي وتأكيد رقم الهاتف",
+    "اختيار تلقي مكافآت الكازينو في \"حسابي\"",
+    "إجراء الإيداع العاشر (الحد الأدنى 10 EUR)",
+    "تُضاف المكافأة تلقائيًا لقسم \"المكافآت والهدايا\" ثم يُضغط \"تفعيل\""
+  ],
+  "deposit_conditions": {"min_deposit_eur": 10, "note": "يُحتسب الإيداع الناجح العاشر منذ التسجيل"},
+  "betting_conditions": {},
+  "casino_conditions": {
+    "excluded_categories": ["Sic-Bo", "البوكر", "الروليت", "البينغو", "البلاك جاك", "Keno", "الصيد", "صيد الأسماك", "Board Games", "Provably Fair", "Zeppelin", "الطاولة", "Legion Poker", "الباكارات", "Live Casino", "الرياضات الافتراضية", "ألعاب السلوت المصغرة", "ألعاب التلفاز", "18+", "IDN Poker", "Spigo", "VULKAN", "بطاقات الخدش", "Wiseodds", "ألعاب الورق", "اليانصيب", "Skill Games", "Crash Games", "JetX", "TVBet", "هولدم", "1XGames"]
+  },
+  "wagering_conditions": {"rollover_multiplier": 25, "wagering_period_hours": 48, "max_bet_during_wagering_eur": 5},
+  "withdrawal_conditions": {"rule": "يجب المراهنة بالكامل من الحساب الرئيسي قبل السحب"},
+  "expiry_conditions": {"note": "تُلغى المكافأة والأرباح غير المدورة عند انتهاء الصلاحية أو الإلغاء"},
+  "disqualification_reasons": ["أكثر من حساب لكل عائلة/IP/جهاز"],
+  "kyc_requirements": ["تطبق الشروط العامة"],
+  "important_warnings": ["جميع أنواع المكافآت معطّلة لحسابات العملات المشفرة بدون استثناء"],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/casino/promotions/slot_ten_deposit",
+  "raw_source_file": "data/raw_sources/slot_ten_deposit.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا"
+}

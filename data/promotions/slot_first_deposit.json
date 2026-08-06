@@ -1,0 +1,74 @@
+{
+  "id": "promo_002",
+  "slug": "slot_first_deposit",
+  "category": "casino_deposit_bonus",
+  "names": {
+    "ar": "حزمة ترحيبية للسلوت (حتى 1500 EUR + 150 دورة مجانية)",
+    "en": "Slot Welcome Package (up to 1500 EUR + 150 Free Spins)",
+    "fr": "Pack de bienvenue slots (jusqu'à 1500 EUR + 150 tours gratuits)"
+  },
+  "status": "active",
+  "new_players_only": true,
+  "promo_code_required": true,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["new_registered_users"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "multi_deposit_match_plus_free_spins",
+    "deposits": [
+      {"deposit_number": 1, "min_deposit_eur": 10, "bonus_percentage": 100, "max_bonus_eur": 300, "free_spins": 30, "spin_game": "Jin Yun ManMan"},
+      {"deposit_number": 2, "min_deposit_eur": 15, "bonus_percentage": 50, "max_bonus_eur": 350, "free_spins": 35, "spin_game": "Mariachi Afortunado"},
+      {"deposit_number": 3, "min_deposit_eur": 15, "bonus_percentage": 25, "max_bonus_eur": 400, "free_spins": 40, "spin_game": "Draco's Gold"},
+      {"deposit_number": 4, "min_deposit_eur": 15, "bonus_percentage": 25, "max_bonus_eur": 450, "free_spins": 45, "spin_game": "Buffalo Goes Wild"}
+    ],
+    "crypto_eligible": true
+  },
+  "activation_steps": [
+    "إنشاء حساب وإكمال المعلومات الشخصية وتفعيل رقم الهاتف",
+    "اختيار المشاركة في عروض مكافآت الكازينو (من إعدادات الحساب أو صفحة الإيداع مباشرة)",
+    "إجراء الإيداع الأول بما لا يقل عن 10 EUR",
+    "تُضاف المكافأة تلقائيًا",
+    "المراهنة بمبلغ المكافأة قبل استلام مكافأة الإيداع التالي"
+  ],
+  "deposit_conditions": {
+    "min_deposit_eur_first": 10,
+    "min_deposit_eur_2_to_4": 15,
+    "note": "يجب استيفاء متطلبات رهان مكافأة الإيداع السابقة قبل التأهل لمكافأة الإيداع التالية"
+  },
+  "betting_conditions": {},
+  "casino_conditions": {
+    "eligible_games_for_free_spins": ["Jin Yun ManMan", "Mariachi Afortunado", "Draco's Gold", "Buffalo Goes Wild"],
+    "excluded_games": ["PF Dice", "PF Roulette", "PF Pokerlight", "Lucky Wheel", "Greyhound Racing", "Monkeys", "African Roulette", "Crown & Anchor", "Derby Racing", "Roulette", "Apple Of Fortune", "Witch: Game Of Thrones", "Dragon's Gold", "Swamp Land", "Eastern Nights", "Minesweeper", "Kamikaze", "Battle City", "Island", "Egg Catcher", "Royal Feast", "Cyber2077", "Hi-lo Triple Chance", "Cases", "Crash", "Jackpot Game", "Respin Slot"],
+    "note": "قائمة الألعاب قد تختلف بين سطح المكتب والهاتف وتتغير دون إشعار"
+  },
+  "wagering_conditions": {
+    "rollover_multiplier": 35,
+    "wagering_period_hours": 168,
+    "max_bet_during_wagering_eur": 5,
+    "note_1xgames_double_counting": "الرهانات في 1xGames تُحسب مرتين ضد متطلبات الرهان عند وجود مكافأة نشطة (باستثناء Blackjack)"
+  },
+  "withdrawal_conditions": {
+    "rule": "يجب المراهنة بمبلغ المكافأة بالكامل قبل سحب أي أموال؛ الرصيد المتبقي بعد الاستيفاء يُضاف للحساب الرئيسي بحد أقصى مبلغ المكافأة الأولي"
+  },
+  "expiry_conditions": {
+    "note": "تُلغى المكافأة والأرباح عند انتهاء صلاحيتها أو إلغائها؛ يمكن الحصول على مكافأة الإيداع التالية فقط بعد المراهنة الكاملة أو انتهاء صلاحية المكافأة الحالية"
+  },
+  "disqualification_reasons": [
+    "التبديل بين أنواع المكافآت (يفقد الحق في الحزمة الترحيبية الكاملة ومكافأة الإيداع العاشر)",
+    "الرهانات المسواة بعد انتهاء صلاحية المكافأة لا تُحتسب"
+  ],
+  "kyc_requirements": ["تطبق شروط KYC العامة لـ1xBet"],
+  "important_warnings": [
+    "إن بدّلت نوع المكافأة أو ألغيتها، تفقد الأهلية لعروض الإيداعات اللاحقة بما فيها الحزمة الترحيبية ومكافأة الإيداع العاشر"
+  ],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/casino/promotions/slot_first_deposit",
+  "raw_source_file": "data/raw_sources/slot_first_deposit.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا"
+}

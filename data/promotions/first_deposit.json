@@ -1,0 +1,76 @@
+{
+  "id": "promo_001",
+  "slug": "first_deposit",
+  "category": "sports_deposit_bonus",
+  "names": {
+    "ar": "بونص أول إيداع (100%)",
+    "en": "First Deposit Bonus (100%)",
+    "fr": "Bonus premier dépôt (100%)"
+  },
+  "status": "active",
+  "new_players_only": true,
+  "promo_code_required": true,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["new_registered_users"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "deposit_match",
+    "percentage": 100,
+    "max_amount_eur": 100,
+    "currency_note": "EUR أو ما يعادلها بالعملة المحلية - القيمة النهائية تظهر داخل حساب اللاعب بعد اختيار الدولة/العملة"
+  },
+  "activation_steps": [
+    "التسجيل على موقع 1xBet أو التطبيق باستخدام بروموكود VIP10IQ",
+    "إكمال جميع الحقول الشخصية في \"حسابي\" وتفعيل رقم الهاتف",
+    "الموافقة على تلقي مكافآت المراهنات الرياضية في إعدادات الحساب",
+    "إجراء إيداع لا يقل عن 1 EUR",
+    "تُضاف المكافأة تلقائيًا (بحد أقصى 100 EUR) دون الحاجة لضغط زر مشاركة منفصل"
+  ],
+  "deposit_conditions": {
+    "min_deposit_eur": 1,
+    "eligible_methods": "غير محددة صراحة في النص",
+    "excluded_methods": "غير مذكورة"
+  },
+  "betting_conditions": {
+    "accepted_bet_types": ["accumulator_only"],
+    "min_selections_per_accumulator": 3,
+    "min_odds_per_selection": 1.4,
+    "single_bets_accepted": false
+  },
+  "casino_conditions": {},
+  "wagering_conditions": {
+    "rollover_multiplier": 5,
+    "wagering_period": "غير محددة صراحة (يجب ألا تتجاوز تواريخ بدء الأحداث فترة صلاحية العرض)",
+    "max_bet_during_wagering": null,
+    "excluded_from_wagering": ["الرهانات المستردة"]
+  },
+  "withdrawal_conditions": {
+    "rule": "لا يمكن السحب قبل استيفاء شروط العرض بالكامل، إلا وفق الملحق: يمكن سحب أي مبلغ حتى إجمالي الإيداعات إذا كان رصيد الحساب المتبقي ضعف مبلغ المكافأة على الأقل (بدون سحب مبلغ المكافأة والأرباح نفسها). لا سحب إذا كان الرصيد أقل من مبلغ المكافأة أو لم تتم تسوية رهان واحد على الأقل."
+  },
+  "expiry_conditions": {
+    "validity_days": 30,
+    "validity_from": "تاريخ التسجيل"
+  },
+  "disqualification_reasons": [
+    "عدم إكمال الملف الشخصي أو عدم تفعيل رقم الهاتف",
+    "استخدام العرض جنبًا إلى جنب مع عرض ترويجي آخر",
+    "أكثر من حساب لنفس الشخص/العائلة/العنوان/الجهاز/IP",
+    "الفشل في تقديم وثائق KYC عند الطلب",
+    "الاشتباه في الاحتيال أو غسيل الأموال"
+  ],
+  "kyc_requirements": ["وثيقة هوية عند الطلب", "قد تُطلب صورة شخصية مع الوثيقة أو مكالمة تحقق"],
+  "important_warnings": [
+    "مكافأة واحدة فقط لكل عميل/عائلة/عنوان/جهاز/IP",
+    "رفض المكافأة قبل استيفاء الشروط بالكامل يؤدي لمصادرة كل الأرباح ومبلغ المكافأة"
+  ],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/promotions/1st",
+  "raw_source_file": "data/raw_sources/first_deposit.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا (وليس عبر وصول آلي - الوصول الآلي محجوب جغرافيًا)"
+}

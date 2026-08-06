@@ -1,0 +1,54 @@
+{
+  "id": "promo_012",
+  "slug": "loss20",
+  "category": "sports_loss_relief_bonus",
+  "names": {"ar": "بونص سلسلة الرهانات الخاسرة", "en": "Losing Streak Bonus", "fr": "Bonus série de paris perdants"},
+  "status": "active",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["registered_users"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "manual_claim_flat_bonus",
+    "tiers": [
+      {"min_bet_usd": 2, "bonus_usd": 100},
+      {"min_bet_usd": 5, "bonus_usd": 250},
+      {"min_bet_usd": 10, "bonus_usd": 500}
+    ]
+  },
+  "activation_steps": [
+    "وضع 20 رهانًا خاسرًا متتاليًا على أحداث رياضية مختلفة خلال 30 يومًا",
+    "الحد الأدنى للرهان 2 USD، الفرص ألا تتجاوز 3.00، رهانات فردية أو تراكمية فقط (لا TOTO أو نظام أو سلسلة)",
+    "إرسال بريد إلكتروني إلى info-ar@1xbet-team.com مع رقم الحساب وعبارة \"سلسلة الرهانات الخاسرة\" في الموضوع"
+  ],
+  "deposit_conditions": {},
+  "betting_conditions": {
+    "min_bet_usd": 2,
+    "max_odds": 3.0,
+    "accepted_bet_types": ["single", "accumulator"],
+    "excluded_bet_types": ["TOTO", "النظام", "رهانات السلسلة"],
+    "accumulator_rule": "يجب أن تكون كل الاختيارات على رياضات ونتائج مختلفة وجميعها خاسرة"
+  },
+  "casino_conditions": {},
+  "wagering_conditions": {},
+  "withdrawal_conditions": {},
+  "expiry_conditions": {"note": "يجب وضع كل الرهانات العشرين خلال فترة 30 يومًا"},
+  "disqualification_reasons": ["حسابات متعددة (عائلة/جهاز/IP)", "التسجيل السريع أو غير المكتمل", "تواطؤ بين العملاء"],
+  "kyc_requirements": ["تطبق الشروط العامة"],
+  "important_warnings": [
+    "هذا العرض تفعيله يدوي عبر البريد الإلكتروني وليس تلقائيًا",
+    "تحذير مسؤول: هذا العرض مرتبط بخسارة 20 رهانًا متتاليًا - لا يجب تشجيع اللاعب على \"مطاردة\" هذه الخسائر عمدًا للحصول على المكافأة",
+    "معطّل لعملات الكريبتو بدون استثناءات"
+  ],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/rules/loss20",
+  "raw_source_file": "data/raw_sources/loss20.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "verified",
+  "verified_via": "نص كامل أرسله المستخدم يدويًا"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "promo_006",
+  "slug": "promo_store",
+  "category": "loyalty_points_store",
+  "names": {
+    "ar": "متجر البروموكود",
+    "en": "Promo Code Store",
+    "fr": "Boutique de codes promo"
+  },
+  "status": "active",
+  "new_players_only": false,
+  "promo_code_required": false,
+  "promo_code": "VIP10IQ",
+  "eligible_countries": ["ALL"],
+  "excluded_countries": [],
+  "eligible_users": ["existing_users_with_bonus_points"],
+  "start_at": null,
+  "end_at": null,
+  "timezone": "UTC+3",
+  "reward": {
+    "type": "points_redemption",
+    "description": "استبدال نقاط المكافأة المتراكمة (من TOTO ومسابقات أخرى) برموز ترويجية/رهانات مجانية على أي نوع رياضة",
+    "note_unconfirmed": "لا يوجد في النص المستلم جدول تحويل رسمي (كم نقطة = كم يورو) ولا حد أدنى/أقصى - تُعرض القيم داخل الحساب فقط"
+  },
+  "activation_steps": [
+    "التحقق من رصيد نقاط المكافأة في قسم \"Promo\"",
+    "الدخول إلى متجر البروموكود",
+    "اختيار برومو كود حسب الرياضة المفضلة (بشرط ألا تتجاوز قيمته نقاط المكافأة المتاحة)",
+    "إدخال عدد النقاط المراد إنفاقها والضغط على \"الحصول على الكود\"",
+    "وضع الرهان"
+  ],
+  "deposit_conditions": {},
+  "betting_conditions": {},
+  "casino_conditions": {},
+  "wagering_conditions": {},
+  "withdrawal_conditions": {},
+  "expiry_conditions": {},
+  "disqualification_reasons": [],
+  "kyc_requirements": [],
+  "important_warnings": ["جميع أنواع المكافآت مُعطّلة للعملات المشفرة بدون استثناءات"],
+  "faq": [],
+  "source_url": "https://1xbet.fi/ar/bonus/rules/promo_store",
+  "raw_source_file": "data/raw_sources/promo_store.txt",
+  "last_checked_at": "2026-08-06",
+  "verification_status": "partial",
+  "verified_via": "نص مختصر أرسله المستخدم - ينقص جدول تحويل النقاط والحدود الرقمية"
+}
