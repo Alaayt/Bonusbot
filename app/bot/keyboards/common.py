@@ -54,3 +54,15 @@ def offers_list_keyboard(lang: str, slugs_and_names: list[tuple[str, str]]) -> I
     rows = [[InlineKeyboardButton(text=name, callback_data=f"offer:{slug}")] for slug, name in slugs_and_names]
     rows.append([InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
+
+
+def registration_links_keyboard(lang: str, registration_url: str, app_download_url: str) -> InlineKeyboardMarkup:
+    """أزرار قابلة للنقر مباشرة (URL buttons) تفتح رابط التسجيل/التطبيق بنقرة واحدة،
+    بدل نسخ ولصق رابط نصي. تُستبعد أي رابط غير مُعد بعد في .env بدل عرض زر مكسور."""
+    rows = []
+    if registration_url:
+        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_registration"), url=registration_url)])
+    if app_download_url:
+        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_app_download"), url=app_download_url)])
+    rows.append([InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")])
+    return InlineKeyboardMarkup(inline_keyboard=rows)

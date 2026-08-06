@@ -2,7 +2,7 @@ from aiogram import F, Router
 from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.bot.keyboards.common import back_to_menu_keyboard
+from app.bot.keyboards.common import back_to_menu_keyboard, registration_links_keyboard
 from app.common.config import get_settings
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.alert_repository import create_manager_alert
@@ -42,17 +42,26 @@ async def _send_registration_info(callback: CallbackQuery, session: AsyncSession
         t(lang, "promo_where_to_enter"),
     ]
 
-    if settings.affiliate_registration_url:
-        lines.append(f"\n{t(lang, 'registration_link_label')}:\n{settings.affiliate_registration_url}")
-    else:
+    if not settings.affiliate_registration_url:
         lines.append(f"\n{t(lang, 'registration_link_missing', promo=settings.promo_code)}")
 
-    if settings.app_download_url:
-        lines.append(f"\n{t(lang, 'app_download_label')}:\n{settings.app_download_url}")
+    # الروابط نفسها تُفتح بنقرة واحدة عبر أزرار URL أسفل الرسالة (registration_links_keyboard)
+    # بدل نسخ/لصق رابط نصي - تجربة أسرع وأوضح للاعب.
+    if settings.affiliate_registration_url or settings.app_download_url:
+        keyboard = registration_links_keyboard(lang, settings.affiliate_registration_url, settings.app_download_url)
+    else:
+        keyboard = back_to_menu_keyboard(lang)
 
-    lines.append(f"\n{t(lang, 'confirm_bonus_after_signup')}")
+    await callback.message.answer("\n".join(lines), reply_markup=keyboard)
 
-    await callback.message.answer("\n".join(lines), reply_markup=back_to_menu_keyboard(lang))
+    # خطوة تكملة الملف الشخصي - رسالة منفصلة حتى لا تُغرق رسالة البروموكود بتفاصيل كثيرة دفعة واحدة
+    await callback.message.answer(
+        f"{t(lang, 'profile_completion_intro')}\n\n"
+        f"{t(lang, 'profile_completion_steps')}\n\n"
+        f"{t(lang, 'profile_completion_benefit')}\n\n"
+        f"{t(lang, 'confirm_bonus_after_signup')}",
+        reply_markup=back_to_menu_keyboard(lang),
+    )
 
     await log_click(session, callback.from_user.id, None, "registration_link")
     await create_manager_alert(

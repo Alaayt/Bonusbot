@@ -36,7 +36,18 @@ STRINGS = {
     "registration_link_label": "Lien d'inscription officiel",
     "registration_link_missing": "Le lien d'inscription officiel n'est pas encore configuré dans le bot. Contactez le responsable pour l'ajouter — en attendant, vous pouvez vous inscrire manuellement sur le site avec le code promo {promo}.",
     "app_download_label": "Lien de téléchargement de l'application",
+    "btn_open_registration": "✅ Ouvrir le lien d'inscription",
+    "btn_open_app_download": "📲 Télécharger l'application",
     "confirm_bonus_after_signup": "Après l'inscription, assurez-vous que le bonus apparaît dans \"Mon compte\" ou sur la page de l'offre avant d'effectuer votre premier dépôt.",
+    "profile_completion_intro": "Étape très importante après l'inscription : complétez votre profil dans \"Mon compte\" immédiatement — sans cela, le bonus ne sera pas ajouté automatiquement même si vous déposez.",
+    "profile_completion_steps": (
+        "Comment compléter votre profil :\n"
+        "1️⃣ Ouvrez \"Mon compte\" juste après l'inscription.\n"
+        "2️⃣ Renseignez vos informations : nom complet, e-mail, pays de résidence.\n"
+        "3️⃣ Vérifiez votre numéro de téléphone avec le code reçu par SMS.\n"
+        "4️⃣ Dans les paramètres du compte, activez \"offres bonus\" (sport et/ou casino selon votre intérêt) — cela doit être activé *avant* votre premier dépôt."
+    ),
+    "profile_completion_benefit": "Pourquoi est-ce important ? Parce que la plupart des bonus (comme le bonus de premier dépôt) ne sont ajoutés automatiquement qu'aux comptes avec un profil complet et un numéro vérifié — s'il manque une étape, le bonus n'arrivera pas même avec un dépôt correct. Compléter votre profil dès le départ facilite aussi toute vérification d'identité (KYC) future au moment du retrait.",
     "ask_sport_or_casino": "Êtes-vous plus intéressé(e) par les paris sportifs, les jeux de casino, ou les deux ?",
     "ask_offer_type": "Recherchez-vous un bonus de premier dépôt, un freebet, du cashback, des tours gratuits, des tournois ou des points promo ?",
     "ask_quick_or_full": "Souhaitez-vous un résumé rapide ou tous les détails ?",

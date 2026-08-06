@@ -36,7 +36,18 @@ STRINGS = {
     "registration_link_label": "Official registration link",
     "registration_link_missing": "The official registration link isn't configured in the bot yet. Please contact the manager to add it — meanwhile you can still register manually on the site using the promo code {promo}.",
     "app_download_label": "App download link",
+    "btn_open_registration": "✅ Open registration link now",
+    "btn_open_app_download": "📲 Download the app now",
     "confirm_bonus_after_signup": "After registering, make sure the bonus appears in your \"My Account\" or the offer page before you make your first deposit.",
+    "profile_completion_intro": "Very important step after registering: complete your profile in \"My Account\" right away — without it, the bonus won't be added automatically even if you deposit.",
+    "profile_completion_steps": (
+        "How to complete your profile:\n"
+        "1️⃣ Open \"My Account\" right after registering.\n"
+        "2️⃣ Fill in your details: full name, email, country of residence.\n"
+        "3️⃣ Verify your phone number with the code sent via SMS.\n"
+        "4️⃣ Go to account settings and opt into \"bonus offers\" (sports and/or casino, based on your interest) — this must be enabled *before* your first deposit."
+    ),
+    "profile_completion_benefit": "Why does this matter? Because most bonuses (like the first deposit bonus) are only added automatically to accounts with a complete profile and a verified phone number — miss a step and the bonus won't arrive even with a correct deposit. Completing your profile early also makes any future identity verification (KYC) at withdrawal time much smoother.",
     "ask_sport_or_casino": "Are you more interested in sports betting, casino games, or both?",
     "ask_offer_type": "Are you looking for a first deposit bonus, freebet, cashback, free spins, tournaments, or promo points?",
     "ask_quick_or_full": "Would you like a quick summary or the full details?",

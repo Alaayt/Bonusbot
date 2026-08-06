@@ -11,15 +11,29 @@ from app.ai.safety.guardrails import (
     detect_profit_guarantee_request,
     scrub_sensitive_data,
 )
-from app.bot.keyboards.common import back_to_menu_keyboard, has_account_keyboard
+from app.bot.keyboards.common import back_to_menu_keyboard, has_account_keyboard, registration_links_keyboard
+from app.common.config import get_settings
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.conversation_repository import get_recent_messages, log_message
 from app.database.repositories.user_repository import update_user
 from app.locales import t
 
 router = Router(name="chat")
+settings = get_settings()
 
 MAX_HISTORY = 12
+
+_REGISTRATION_OR_APP_KEYWORDS = [
+    "سجل", "تسجيل", "حساب جديد", "افتح حساب", "رابط التسجيل", "رابط تسجيل",
+    "تحميل", "التطبيق", "تنزيل",
+    "register", "sign up", "signup", "create account", "download", " app ", "app.",
+    "s'inscrire", "inscription", "télécharger", "application",
+]
+
+
+def _wants_registration_or_app(text: str) -> bool:
+    lowered = f" {text.lower()} "
+    return any(keyword in lowered for keyword in _REGISTRATION_OR_APP_KEYWORDS)
 
 
 @router.callback_query(F.data == "action:find_for_me")
@@ -98,4 +112,12 @@ async def on_free_text(message: Message, state: FSMContext, session: AsyncSessio
     )
 
     await log_message(session, user.id, message.from_user.id, "assistant", reply)
-    await message.answer(reply, reply_markup=back_to_menu_keyboard(lang))
+
+    # لو كان اللاعب يسأل عن التسجيل أو تحميل التطبيق، أرفق أزرار نقرة-واحدة فعلية
+    # بدل ما يعتمد فقط على الرابط النصي اللي كتبه النموذج داخل الرد.
+    if _wants_registration_or_app(safe_text) and (settings.affiliate_registration_url or settings.app_download_url):
+        keyboard = registration_links_keyboard(lang, settings.affiliate_registration_url, settings.app_download_url)
+    else:
+        keyboard = back_to_menu_keyboard(lang)
+
+    await message.answer(reply, reply_markup=keyboard)
