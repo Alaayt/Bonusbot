@@ -26,3 +26,11 @@ def test_format_placeholders_work():
 def test_responsible_gaming_text_mentions_stop_marketing_command():
     for lang in SUPPORTED_LANGUAGES:
         assert "/stop_marketing" in t(lang, "responsible_gaming_text")
+
+
+def test_welcome_message_interpolates_name_and_suggests_example_questions():
+    for lang in SUPPORTED_LANGUAGES:
+        rendered = t(lang, "welcome_message", name="Sara")
+        assert "Sara" in rendered
+        assert "{name}" not in rendered
+        assert "💬" in rendered  # يحتوي أمثلة أسئلة تشجّع اللاعب يبدأ محادثة طبيعية

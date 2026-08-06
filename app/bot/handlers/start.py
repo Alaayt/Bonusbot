@@ -18,7 +18,10 @@ router = Router(name="start")
 @router.message(CommandStart())
 async def cmd_start(message: Message, state: FSMContext, session: AsyncSession, user: User) -> None:
     if user.language and user.country_code and user.age_confirmed_adult:
-        await message.answer(t(user.language, "main_menu_title"), reply_markup=main_menu_keyboard(user.language))
+        name = message.from_user.first_name or ""
+        await message.answer(
+            t(user.language, "welcome_message", name=name), reply_markup=main_menu_keyboard(user.language)
+        )
         return
     await state.set_state(Onboarding.choosing_language)
     await message.answer(t("ar", "choose_language"), reply_markup=language_keyboard())
@@ -87,8 +90,9 @@ async def on_age_no(callback: CallbackQuery, state: FSMContext, session: AsyncSe
 async def on_age_yes(callback: CallbackQuery, state: FSMContext, session: AsyncSession, user: User) -> None:
     lang = user.language or "ar"
     await update_user(session, user, age_confirmed_adult=True, stage=PlayerStage.EXPLORING)
-    await callback.message.edit_text(t(lang, "main_menu_title"))
-    await callback.message.answer(t(lang, "main_menu_title"), reply_markup=main_menu_keyboard(lang))
+    name = callback.from_user.first_name or ""
+    await callback.message.edit_text(t(lang, "age_confirm_yes"))
+    await callback.message.answer(t(lang, "welcome_message", name=name), reply_markup=main_menu_keyboard(lang))
     await state.clear()
     await callback.answer()
 

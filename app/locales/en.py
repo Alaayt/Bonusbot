@@ -8,6 +8,14 @@ STRINGS = {
     "age_confirm_no": "No",
     "minor_blocked": "Thanks for being honest. This service is for adults only, per our responsible gaming policy, so I can't share registration or deposit information with you. If you need help with anything unrelated to betting, I'm here.",
     "main_menu_title": "Great! How can I help you today?",
+    "welcome_message": (
+        "Hey {name} 👋 You're in the right place! I know every detail of 1xBet's promotions, and I can help you find the best one for you in under a minute.\n\n"
+        "Try asking me anything, like:\n"
+        "💬 \"I want a football bonus\"\n"
+        "💬 \"What's the best casino offer?\"\n"
+        "💬 \"How do I register a new account?\"\n\n"
+        "Or browse the menu below 👇"
+    ),
     "btn_first_deposit": "🎁 First Deposit Bonus",
     "btn_sports": "⚽ Sports Offers",
     "btn_casino": "🎰 Casino Offers",

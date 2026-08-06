@@ -8,6 +8,14 @@ STRINGS = {
     "age_confirm_no": "Non",
     "minor_blocked": "Merci pour votre honnêteté. Ce service est réservé aux adultes, conformément à notre politique de jeu responsable, je ne peux donc pas partager d'informations sur l'inscription ou le dépôt avec vous. Pour toute autre question sans lien avec les paris, je reste disponible.",
     "main_menu_title": "Parfait ! Comment puis-je vous aider aujourd'hui ?",
+    "welcome_message": (
+        "Salut {name} 👋 Vous êtes au bon endroit ! Je connais tous les détails des promotions 1xBet, et je peux vous aider à trouver la meilleure offre pour vous en moins d'une minute.\n\n"
+        "Essayez de me demander n'importe quoi, par exemple :\n"
+        "💬 « Je veux un bonus football »\n"
+        "💬 « Quelle est la meilleure offre casino ? »\n"
+        "💬 « Comment créer un nouveau compte ? »\n\n"
+        "Ou parcourez le menu ci-dessous 👇"
+    ),
     "btn_first_deposit": "🎁 Bonus premier dépôt",
     "btn_sports": "⚽ Offres sportives",
     "btn_casino": "🎰 Offres casino",
