@@ -19,9 +19,28 @@ from app.bot.middlewares.user_context import UserContextMiddleware
 from app.common.config import get_settings
 from app.common.logging import setup_logging
 from app.database.engine import init_db
+from app.promotions.services.promotion_store import get_all_promotions
 from app.scheduler.promotion_watcher import start_scheduler
 
 logger = logging.getLogger(__name__)
+
+
+def _check_promotions_loaded() -> None:
+    """
+    فحص إقلاع حرج: لو رجع 0 عرض، الأرجح أن مجلد data/promotions فارغ في بيئة التشغيل -
+    السبب الشائع جدًا على منصات مثل Railway/Render هو تركيب Volume فارغ فوق مسار /app/data
+    نفسه، فيغطي محتوى الصورة (data/promotions, data/raw_sources) المُدمج فيها من COPY . .
+    راجع docs/deployment.md قسم "تحذير: Volumes ومسار data/" لحل الموضوع.
+    """
+    count = len(get_all_promotions())
+    if count == 0:
+        logger.critical(
+            "⚠️ عدد العروض المحمّلة من data/promotions هو 0! على الأغلب مجلد data/ "
+            "فارغ في بيئة التشغيل الحالية (سبب شائع: Volume مُركَّب على /app/data يغطي "
+            "ملفات العروض المدمجة في صورة Docker). راجع docs/deployment.md قبل المتابعة."
+        )
+    else:
+        logger.info("تم تحميل %d عرضًا من قاعدة المعرفة (data/promotions).", count)
 
 
 async def main() -> None:
@@ -31,6 +50,7 @@ async def main() -> None:
     if not settings.telegram_bot_token:
         raise RuntimeError("TELEGRAM_BOT_TOKEN غير مضبوط في .env")
 
+    _check_promotions_loaded()
     await init_db()
 
     bot = Bot(token=settings.telegram_bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))

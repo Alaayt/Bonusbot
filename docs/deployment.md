@@ -16,7 +16,32 @@ docker compose up --build -d
 docker compose logs -f bot
 ```
 
-`docker-compose.yml` يشغّل: البوت + Redis + PostgreSQL معًا. البيانات (`data/promotions`, `data/raw_sources`) تُركَّب كـ volume فتبقى محفوظة بين إعادة التشغيل.
+`docker-compose.yml` يشغّل: البوت + Redis + PostgreSQL معًا. `./data:/app/data` هنا هو **bind mount من مجلد المشروع نفسه على الجهاز المضيف** (وليس Volume فارغ) - يعمل بأمان لأن `./data` على القرص فعليًا يحتوي على `promotions/` و`raw_sources/` من البداية.
+
+## ⚠️ تحذير حرج: Volumes على منصات الاستضافة السحابية (Railway/Render/Fly.io...)
+
+هذا خطأ شائع جدًا ويُسقط قاعدة معرفة العروض بالكامل بصمت (بدون أي رسالة خطأ واضحة، فقط `/admin_stats` يظهر "عدد العروض: 0"):
+
+**المشكلة:** أي Volume تُنشئه حديثًا على منصات مثل Railway يبدأ **فارغًا تمامًا**. لو ركّبته على مسار `/app/data` (نفس المسار اللي فيه `data/promotions/` و`data/raw_sources/` المُدمجة داخل صورة Docker من خطوة `COPY . .` في `Dockerfile`)، فإن Railway "يغطي" محتوى الصورة بالفراغ - فيختفي كل ملفات JSON للعروض من منظور التطبيق وقت التشغيل، رغم وجودها في الكود على GitHub.
+
+**الحل الصحيح:** ركّب الـ Volume على مسار **فرعي أضيق** مخصص فقط لملف قاعدة البيانات (الشيء الوحيد اللي يحتاج فعليًا يبقى Persistent بين عمليات إعادة النشر)، وليس على `data/` كاملة:
+
+1. **Mount Path** في إعدادات الـ Volume:
+   ```
+   /app/data/db
+   ```
+   (وليس `/app/data`)
+
+2. **متغير البيئة** `DATABASE_URL`:
+   ```
+   DATABASE_URL=sqlite+aiosqlite:///./data/db/bonusbot.db
+   ```
+
+بهذا الشكل: `data/promotions` و`data/raw_sources` يبقيان من الصورة (يتحدّثان فقط عبر `git push` جديد)، بينما `data/db/bonusbot.db` (المستخدمون، المحادثات، التنبيهات) يبقى محفوظًا عبر Volume منفصل لا يلمس ملفات العروض.
+
+بديل أنظف للإنتاج: استخدم PostgreSQL بدل SQLite (أضِف Postgres من Railway نفسه واضبط `DATABASE_URL=postgresql+asyncpg://...`) - عندها لا تحتاج أي Volume إطلاقًا، ويختفي هذا الخطر نهائيًا.
+
+بعد أي تعديل، تحقق فورًا عبر `/admin_stats` من داخل تيليجرام: يجب أن يظهر "عدد العروض في قاعدة المعرفة: 29" (أو أكثر لاحقًا). لو ظهر 0، راجع سجلات الإقلاع (Logs) - أضفنا تحذيرًا صريحًا (`_check_promotions_loaded` في `app/main.py`) يظهر في السجلات فورًا عند هذه المشكلة تحديدًا.
 
 ## النشر اليدوي (VPS)
 
