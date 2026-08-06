@@ -77,4 +77,28 @@ STRINGS = {
     "stop_marketing_confirm": "Promotional messages have been turned off for your account. I'm still here if you need help or an explanation.",
     "unclear_message": "I didn't quite catch that 🤔 Could you rephrase, or use the main menu:",
     "not_available_in_country": "Based on our current information, this offer might not be available in {country} — but final availability is confirmed inside your account after registration. Would you like an alternative offer instead?",
+    "help_text": (
+        "I'm your 1xBet promotions advisor - I can help you with:\n"
+        "🎁 Explaining any offer and its terms in detail\n"
+        "🔎 Picking the best offer for you\n"
+        "✅ Registering with promo code VIP10IQ\n"
+        "🛠 Fixing a missing-bonus issue\n"
+        "👨‍💼 Reaching the human manager\n\n"
+        "Available commands:\n"
+        "/start or /menu - Main menu\n"
+        "/language - Change language\n"
+        "/manager - Contact the manager\n"
+        "/responsible - Responsible gaming\n"
+        "/stop_marketing - Turn off promotional messages\n\n"
+        "Or just type your question anytime, in Arabic, English, or French 👇"
+    ),
+    "cmd_start_desc": "Start / Main menu",
+    "cmd_menu_desc": "Main menu",
+    "cmd_language_desc": "Change language",
+    "cmd_help_desc": "Help and available commands",
+    "cmd_manager_desc": "Contact the manager",
+    "cmd_responsible_desc": "Responsible gaming",
+    "cmd_stop_marketing_desc": "Turn off promotional messages",
+    "bot_short_description": "Your smart 1xBet promotions advisor - offers explained, best pick for you, promo code VIP10IQ 🎁",
+    "bot_full_description": "Hi! I'm a smart bot specialized in explaining 1xBet promotions accurately, helping you pick the right offer, and registering a new account with promo code VIP10IQ. Tap Start to continue 👇",
 }

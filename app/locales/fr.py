@@ -77,4 +77,28 @@ STRINGS = {
     "stop_marketing_confirm": "Les messages promotionnels ont été désactivés pour votre compte. Je reste disponible si vous avez besoin d'aide ou d'explications.",
     "unclear_message": "Je n'ai pas bien compris 🤔 Pouvez-vous reformuler, ou utiliser le menu principal :",
     "not_available_in_country": "D'après nos informations actuelles, cette offre pourrait ne pas être disponible en/au {country} — mais la disponibilité finale est confirmée dans votre compte après inscription. Souhaitez-vous une offre alternative ?",
+    "help_text": (
+        "Je suis votre conseiller pour les promotions 1xBet - je peux vous aider à :\n"
+        "🎁 Expliquer n'importe quelle offre et ses conditions en détail\n"
+        "🔎 Choisir la meilleure offre pour vous\n"
+        "✅ Vous inscrire avec le code promo VIP10IQ\n"
+        "🛠 Résoudre un problème de bonus non reçu\n"
+        "👨‍💼 Vous mettre en relation avec le responsable\n\n"
+        "Commandes disponibles :\n"
+        "/start ou /menu - Menu principal\n"
+        "/language - Changer de langue\n"
+        "/manager - Contacter le responsable\n"
+        "/responsible - Jeu responsable\n"
+        "/stop_marketing - Désactiver les messages promotionnels\n\n"
+        "Ou posez votre question directement, à tout moment, en arabe, anglais ou français 👇"
+    ),
+    "cmd_start_desc": "Démarrer / Menu principal",
+    "cmd_menu_desc": "Menu principal",
+    "cmd_language_desc": "Changer de langue",
+    "cmd_help_desc": "Aide et commandes disponibles",
+    "cmd_manager_desc": "Contacter le responsable",
+    "cmd_responsible_desc": "Jeu responsable",
+    "cmd_stop_marketing_desc": "Désactiver les messages promotionnels",
+    "bot_short_description": "Conseiller promotions 1xBet - offres expliquées, meilleur choix pour vous, code promo VIP10IQ 🎁",
+    "bot_full_description": "Bonjour ! Je suis un bot intelligent spécialisé dans l'explication précise des promotions 1xBet, je vous aide à choisir la bonne offre et à créer un nouveau compte avec le code promo VIP10IQ. Appuyez sur Démarrer pour continuer 👇",
 }

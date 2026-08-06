@@ -8,6 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from app.admin.router import router as admin_router
 from app.bot.handlers.chat import router as chat_router
+from app.bot.handlers.commands import router as commands_router
 from app.bot.handlers.manager import router as manager_router
 from app.bot.handlers.missing_bonus import router as missing_bonus_router
 from app.bot.handlers.offers import router as offers_router
@@ -16,6 +17,7 @@ from app.bot.handlers.settings import router as settings_router
 from app.bot.handlers.start import router as start_router
 from app.bot.middlewares.db_session import DbSessionMiddleware
 from app.bot.middlewares.user_context import UserContextMiddleware
+from app.bot.setup_profile import setup_bot_profile
 from app.common.config import get_settings
 from app.common.logging import setup_logging
 from app.database.engine import init_db
@@ -62,12 +64,15 @@ async def main() -> None:
     # ترتيب التسجيل مهم: admin أولاً (فلتر صارم)، ثم المسارات المحددة، ثم chat كـ catch-all أخيرًا
     dp.include_router(admin_router)
     dp.include_router(start_router)
+    dp.include_router(commands_router)
     dp.include_router(offers_router)
     dp.include_router(registration_router)
     dp.include_router(manager_router)
     dp.include_router(missing_bonus_router)
     dp.include_router(settings_router)
     dp.include_router(chat_router)
+
+    await setup_bot_profile(bot)
 
     scheduler = start_scheduler()
 
