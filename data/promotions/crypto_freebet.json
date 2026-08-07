@@ -55,9 +55,9 @@
     "validity_hours": 24,
     "validity_from": "وقت إضافة الرمز الترويجي"
   },
-  "disqualification_reasons": ["إساءة استخدام إستراتيجيات يعتبرها 1xBet مسيئة", "عدم تقديم وثائق KYC عند الطلب"],
+  "disqualification_reasons": ["إساءة استخدام إستراتيجيات يعتبرها اللعبة مسيئة", "عدم تقديم وثائق KYC عند الطلب"],
   "kyc_requirements": ["وثيقة هوية عند الطلب", "قد تُطلب صورة شخصية أو تحقق هاتفي"],
-  "important_warnings": ["متاح فقط للإيداعات بالعملات الرقمية تحديدًا (على عكس معظم عروض 1xBet الأخرى التي تستثني الكريبتو)"],
+  "important_warnings": ["متاح فقط للإيداعات بالعملات الرقمية تحديدًا (على عكس معظم عروض اللعبة الأخرى التي تستثني الكريبتو)"],
   "faq": [],
   "source_url": "https://1xbet.fi/ar/bonus/rules/crypto-freebet",
   "raw_source_file": "data/raw_sources/crypto_freebet.txt",

@@ -9,7 +9,7 @@ STRINGS = {
     "minor_blocked": "Thanks for being honest. This service is for adults only, per our responsible gaming policy, so I can't share registration or deposit information with you. If you need help with anything unrelated to betting, I'm here.",
     "main_menu_title": "Great! How can I help you today?",
     "welcome_message": (
-        "Hey {name} 👋 You're in the right place! I know every detail of 1xBet's promotions, and I can help you find the best one for you in under a minute.\n\n"
+        "Hey {name} 👋 You're in the right place! I know every detail of the game's promotions, and I can help you find the best one for you in under a minute.\n\n"
         "Try asking me anything, like:\n"
         "💬 \"I want a football bonus\"\n"
         "💬 \"What's the best casino offer?\"\n"
@@ -35,7 +35,7 @@ STRINGS = {
     "btn_full_details": "📄 Full Details",
     "btn_has_account": "I have an existing account",
     "btn_no_account": "I don't have one / I want a new account",
-    "ask_has_account": "Do you already have a 1xBet account, or do you want to create a new one?",
+    "ask_has_account": "Do you already have an account for the game, or do you want to create a new one?",
     "existing_account_needs_new_one": "⚠️ Important: promo code VIP10IQ and all the offers tied to it only work with a new account created using the promo code at registration. Your existing account can't be linked to it retroactively. If you'd like these offers, you can create a new account with the promo code below (in addition to your existing one).",
     "has_account_reply": "Got it. Most first-deposit offers are exclusive to new accounts, but you're eligible for offers like {options} on your existing account. Which one interests you?",
     "no_account_promo_intro": "Great! To unlock every offer (especially the first deposit bonus), you need to register a new account with this promo code:",
@@ -86,7 +86,7 @@ STRINGS = {
     "unclear_message": "I didn't quite catch that 🤔 Could you rephrase, or use the main menu:",
     "not_available_in_country": "Based on our current information, this offer might not be available in {country} — but final availability is confirmed inside your account after registration. Would you like an alternative offer instead?",
     "help_text": (
-        "I'm your 1xBet promotions advisor - I can help you with:\n"
+        "I'm your promotions advisor for the game - I can help you with:\n"
         "🎁 Explaining any offer and its terms in detail\n"
         "🔎 Picking the best offer for you\n"
         "✅ Registering with promo code VIP10IQ\n"
@@ -107,6 +107,6 @@ STRINGS = {
     "cmd_manager_desc": "Contact the manager",
     "cmd_responsible_desc": "Responsible gaming",
     "cmd_stop_marketing_desc": "Turn off promotional messages",
-    "bot_short_description": "Your smart 1xBet promotions advisor - offers explained, best pick for you, promo code VIP10IQ 🎁",
-    "bot_full_description": "Hi! I'm a smart bot specialized in explaining 1xBet promotions accurately, helping you pick the right offer, and registering a new account with promo code VIP10IQ. Tap Start to continue 👇",
+    "bot_short_description": "Your smart promotions advisor for the game - offers explained, best pick for you, promo code VIP10IQ 🎁",
+    "bot_full_description": "Hi! I'm a smart bot specialized in explaining the game's promotions accurately, helping you pick the right offer, and registering a new account with promo code VIP10IQ. Tap Start to continue 👇",
 }

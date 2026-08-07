@@ -14,7 +14,7 @@
   "end_at": null,
   "timezone": "UTC+3",
   "reward": {"type": "random_daily_winnings_multiplier", "multiplier": 2, "selection_method": "10,000 رهان عشوائي يوميًا من رهانات 1xGames الفائزة"},
-  "activation_steps": ["الموافقة على المشاركة في عروض المكافآت", "وضع رهانات 2 EUR+ في 1xGames والفوز", "1xBet تختار عشوائيًا 10,000 رهان يوميًا وتُضاعف أرباحها x2"],
+  "activation_steps": ["الموافقة على المشاركة في عروض المكافآت", "وضع رهانات 2 EUR+ في 1xGames والفوز", "اللعبة تختار عشوائيًا 10,000 رهان يوميًا وتُضاعف أرباحها x2"],
   "deposit_conditions": {},
   "betting_conditions": {"min_bet_eur": 2, "excluded_games": ["الروليت", "PF Dice", "PF Roulette", "PF Poker Light", "African Roulette"]},
   "casino_conditions": {},

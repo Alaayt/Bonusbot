@@ -9,7 +9,7 @@ STRINGS = {
     "minor_blocked": "Merci pour votre honnêteté. Ce service est réservé aux adultes, conformément à notre politique de jeu responsable, je ne peux donc pas partager d'informations sur l'inscription ou le dépôt avec vous. Pour toute autre question sans lien avec les paris, je reste disponible.",
     "main_menu_title": "Parfait ! Comment puis-je vous aider aujourd'hui ?",
     "welcome_message": (
-        "Salut {name} 👋 Vous êtes au bon endroit ! Je connais tous les détails des promotions 1xBet, et je peux vous aider à trouver la meilleure offre pour vous en moins d'une minute.\n\n"
+        "Salut {name} 👋 Vous êtes au bon endroit ! Je connais tous les détails des promotions du jeu, et je peux vous aider à trouver la meilleure offre pour vous en moins d'une minute.\n\n"
         "Essayez de me demander n'importe quoi, par exemple :\n"
         "💬 « Je veux un bonus football »\n"
         "💬 « Quelle est la meilleure offre casino ? »\n"
@@ -35,7 +35,7 @@ STRINGS = {
     "btn_full_details": "📄 Détails complets",
     "btn_has_account": "J'ai déjà un compte",
     "btn_no_account": "Je n'en ai pas / je veux un nouveau compte",
-    "ask_has_account": "Avez-vous déjà un compte 1xBet, ou souhaitez-vous en créer un nouveau ?",
+    "ask_has_account": "Avez-vous déjà un compte pour le jeu, ou souhaitez-vous en créer un nouveau ?",
     "existing_account_needs_new_one": "⚠️ Important : le code promo VIP10IQ et toutes les offres qui y sont liées ne fonctionnent qu'avec un nouveau compte créé avec le code promo lors de l'inscription. Votre compte existant ne peut pas y être rattaché rétroactivement. Si vous souhaitez profiter de ces offres, vous pouvez créer un nouveau compte avec le code promo ci-dessous (en plus de votre compte actuel).",
     "has_account_reply": "Compris. La plupart des offres de premier dépôt sont réservées aux nouveaux comptes, mais vous êtes éligible à des offres comme {options} sur votre compte actuel. Laquelle vous intéresse ?",
     "no_account_promo_intro": "Parfait ! Pour débloquer toutes les offres (surtout le bonus de premier dépôt), inscrivez un nouveau compte avec ce code promo :",
@@ -86,7 +86,7 @@ STRINGS = {
     "unclear_message": "Je n'ai pas bien compris 🤔 Pouvez-vous reformuler, ou utiliser le menu principal :",
     "not_available_in_country": "D'après nos informations actuelles, cette offre pourrait ne pas être disponible en/au {country} — mais la disponibilité finale est confirmée dans votre compte après inscription. Souhaitez-vous une offre alternative ?",
     "help_text": (
-        "Je suis votre conseiller pour les promotions 1xBet - je peux vous aider à :\n"
+        "Je suis votre conseiller pour les promotions du jeu - je peux vous aider à :\n"
         "🎁 Expliquer n'importe quelle offre et ses conditions en détail\n"
         "🔎 Choisir la meilleure offre pour vous\n"
         "✅ Vous inscrire avec le code promo VIP10IQ\n"
@@ -107,6 +107,6 @@ STRINGS = {
     "cmd_manager_desc": "Contacter le responsable",
     "cmd_responsible_desc": "Jeu responsable",
     "cmd_stop_marketing_desc": "Désactiver les messages promotionnels",
-    "bot_short_description": "Conseiller promotions 1xBet - offres expliquées, meilleur choix pour vous, code promo VIP10IQ 🎁",
-    "bot_full_description": "Bonjour ! Je suis un bot intelligent spécialisé dans l'explication précise des promotions 1xBet, je vous aide à choisir la bonne offre et à créer un nouveau compte avec le code promo VIP10IQ. Appuyez sur Démarrer pour continuer 👇",
+    "bot_short_description": "Conseiller promotions du jeu - offres expliquées, meilleur choix pour vous, code promo VIP10IQ 🎁",
+    "bot_full_description": "Bonjour ! Je suis un bot intelligent spécialisé dans l'explication précise des promotions du jeu, je vous aide à choisir la bonne offre et à créer un nouveau compte avec le code promo VIP10IQ. Appuyez sur Démarrer pour continuer 👇",
 }

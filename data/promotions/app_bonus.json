@@ -19,7 +19,7 @@
     "tiers": {"3-5_bets": "10%", "6-9_bets": "15%", "10+_bets": "25%"},
     "max_amount_eur": 100
   },
-  "activation_steps": ["الضغط على \"المشاركة\" في صفحة العرض", "وضع رهانات 1 EUR+ عبر تطبيق 1xBet (iOS/Android) فقط بين الاثنين والأحد", "يُضاف الاسترداد تلقائيًا كل ثلاثاء"],
+  "activation_steps": ["الضغط على \"المشاركة\" في صفحة العرض", "وضع رهانات 1 EUR+ عبر تطبيق اللعبة (iOS/Android) فقط بين الاثنين والأحد", "يُضاف الاسترداد تلقائيًا كل ثلاثاء"],
   "deposit_conditions": {},
   "betting_conditions": {"min_bet_eur": 1, "min_odds_single": 1.5, "min_selections_accumulator": 2, "min_odds_per_selection_accumulator": 1.4, "platform_restriction": "تطبيق الهاتف المحمول فقط (لا يشمل الموقع أو سطح المكتب)"},
   "casino_conditions": {},
