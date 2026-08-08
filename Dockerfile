@@ -14,4 +14,4 @@ COPY . .
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app
 
-CMD ["python", "-m", "app.main"]
+CMD ["sh", "-c", "python -m alembic upgrade head && python -m app.main"]
