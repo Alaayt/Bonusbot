@@ -43,5 +43,7 @@ class User(Base):
 
     marketing_opt_out: Mapped[bool] = mapped_column(Boolean, default=False)
 
+    last_nav_message_id: Mapped[int | None] = mapped_column(BigInteger, nullable=True)
+
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

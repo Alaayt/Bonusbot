@@ -12,6 +12,7 @@ from app.ai.safety.guardrails import (
     scrub_sensitive_data,
 )
 from app.bot.keyboards.common import back_to_menu_keyboard, has_account_keyboard, registration_links_keyboard
+from app.bot.nav import send_nav
 from app.common.config import get_settings
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.conversation_repository import get_recent_messages, log_message
@@ -37,7 +38,7 @@ def _wants_registration_or_app(text: str) -> bool:
 
 
 @router.callback_query(F.data == "action:find_for_me")
-async def on_find_for_me(callback: CallbackQuery, user: User) -> None:
+async def on_find_for_me(callback: CallbackQuery, session: AsyncSession, user: User) -> None:
     """
     نسأل عن حالة الحساب هنا (وليس في مسار التسجيل نفسه) لأنها مفيدة لتخصيص التوصية:
     مثلاً صاحب حساب حالي يُنصح بعروض تناسب حسابه بجانب تشجيعه على حساب جديد بالبروموكود،
@@ -45,10 +46,10 @@ async def on_find_for_me(callback: CallbackQuery, user: User) -> None:
     """
     lang = user.language or "ar"
     if user.has_existing_account is None:
-        await callback.message.answer(t(lang, "ask_has_account"), reply_markup=has_account_keyboard(lang))
+        await send_nav(callback, user, session, t(lang, "ask_has_account"), has_account_keyboard(lang))
         await callback.answer()
         return
-    await callback.message.answer(t(lang, "ask_sport_or_casino"), reply_markup=back_to_menu_keyboard(lang))
+    await send_nav(callback, user, session, t(lang, "ask_sport_or_casino"), back_to_menu_keyboard(lang))
     await callback.answer()
 
 
@@ -57,7 +58,7 @@ async def on_account_status_for_recommendation(callback: CallbackQuery, session:
     lang = user.language or "ar"
     has_account = callback.data.split(":", 1)[1] == "has"
     await update_user(session, user, has_existing_account=has_account)
-    await callback.message.answer(t(lang, "ask_sport_or_casino"), reply_markup=back_to_menu_keyboard(lang))
+    await send_nav(callback, user, session, t(lang, "ask_sport_or_casino"), back_to_menu_keyboard(lang))
     await callback.answer()
 
 

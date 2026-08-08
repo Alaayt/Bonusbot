@@ -3,6 +3,7 @@ from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bot.keyboards.common import full_details_keyboard, offers_list_keyboard
+from app.bot.nav import send_nav
 from app.database.models.user import User
 from app.database.repositories.promotion_meta_repository import log_click
 from app.locales import t
@@ -44,7 +45,7 @@ async def on_category_selected(callback: CallbackQuery, session: AsyncSession, u
         return
 
     items = [(p.slug, p.name(lang)) for p in promos]
-    await callback.message.answer(t(lang, "main_menu_title"), reply_markup=offers_list_keyboard(lang, items))
+    await send_nav(callback, user, session, t(lang, "main_menu_title"), offers_list_keyboard(lang, items))
     await callback.answer()
 
 
