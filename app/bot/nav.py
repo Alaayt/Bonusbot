@@ -30,8 +30,13 @@ async def send_nav(
     if user.last_nav_message_id:
         try:
             await bot.delete_message(chat_id=message.chat.id, message_id=user.last_nav_message_id)
-        except TelegramBadRequest:
-            pass  # رسالة قديمة جدًا أو محذوفة أصلًا - لا مشكلة
+            logger.info("nav: deleted previous message %s in chat %s", user.last_nav_message_id, message.chat.id)
+        except TelegramBadRequest as exc:
+            logger.warning(
+                "nav: failed to delete previous message %s in chat %s: %s", user.last_nav_message_id, message.chat.id, exc
+            )
+    else:
+        logger.info("nav: no previous nav message tracked for user %s yet", user.telegram_id)
 
     sent = await message.answer(text, reply_markup=reply_markup)
     await update_user(session, user, last_nav_message_id=sent.message_id)
