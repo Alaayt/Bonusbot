@@ -16,6 +16,8 @@ STRINGS = {
         "💬 \"How do I register a new account?\"\n\n"
         "Or browse the menu below 👇"
     ),
+    "btn_persistent_menu": "📋 Menu",
+    "persistent_menu_hint": "💡 Tip: use the \"📋 Menu\" button below the text field anytime to quickly get back to the main menu.",
     "btn_first_deposit": "🎁 First Deposit Bonus",
     "btn_sports": "⚽ Sports Offers",
     "btn_casino": "🎰 Casino Offers",

@@ -4,7 +4,7 @@
 بجانب حقل الكتابة في تيليجرام بعد تسجيلها عبر setMyCommands في app/main.py.
 """
 
-from aiogram import Router
+from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
@@ -18,12 +18,15 @@ from app.bot.states.onboarding import Onboarding
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.alert_repository import create_manager_alert
 from app.database.repositories.user_repository import update_user
-from app.locales import t
+from app.locales import SUPPORTED_LANGUAGES, t
 
 router = Router(name="commands")
 
+_PERSISTENT_MENU_BUTTON_TEXTS = {t(lang, "btn_persistent_menu") for lang in SUPPORTED_LANGUAGES}
+
 
 @router.message(Command("menu"))
+@router.message(F.text.in_(_PERSISTENT_MENU_BUTTON_TEXTS))
 async def cmd_menu(message: Message, session: AsyncSession, user: User) -> None:
     lang = user.language or "ar"
     await send_nav(message, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))

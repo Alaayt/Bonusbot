@@ -16,6 +16,8 @@ STRINGS = {
         "💬 « Comment créer un nouveau compte ? »\n\n"
         "Ou parcourez le menu ci-dessous 👇"
     ),
+    "btn_persistent_menu": "📋 Menu",
+    "persistent_menu_hint": "💡 Astuce : utilisez le bouton \"📋 Menu\" sous le champ de texte à tout moment pour revenir rapidement au menu principal.",
     "btn_first_deposit": "🎁 Bonus premier dépôt",
     "btn_sports": "⚽ Offres sportives",
     "btn_casino": "🎰 Offres casino",

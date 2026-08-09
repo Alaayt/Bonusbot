@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.bot.keyboards.common import age_confirm_keyboard, country_keyboard
 from app.bot.keyboards.language import language_keyboard
 from app.bot.keyboards.main_menu import main_menu_keyboard
+from app.bot.keyboards.persistent import persistent_menu_keyboard
 from app.bot.nav import send_nav
 from app.bot.states.onboarding import Onboarding
 from app.database.models.user import PlayerStage, User
@@ -23,6 +24,7 @@ async def cmd_start(message: Message, state: FSMContext, session: AsyncSession, 
         await send_nav(
             message, user, session, t(user.language, "welcome_message", name=name), main_menu_keyboard(user.language)
         )
+        await message.answer(t(user.language, "persistent_menu_hint"), reply_markup=persistent_menu_keyboard(user.language))
         return
     await state.set_state(Onboarding.choosing_language)
     await send_nav(message, user, session, t("ar", "choose_language"), language_keyboard())
@@ -94,6 +96,7 @@ async def on_age_yes(callback: CallbackQuery, state: FSMContext, session: AsyncS
     name = callback.from_user.first_name or ""
     await callback.message.edit_text(t(lang, "age_confirm_yes"))
     await send_nav(callback, user, session, t(lang, "welcome_message", name=name), main_menu_keyboard(lang))
+    await callback.message.answer(t(lang, "persistent_menu_hint"), reply_markup=persistent_menu_keyboard(lang))
     await state.clear()
     await callback.answer()
 
