@@ -20,5 +20,6 @@ def main_menu_keyboard(lang: str) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=t(lang, "btn_manager"), callback_data="action:manager")],
         [InlineKeyboardButton(text=t(lang, "btn_change_language"), callback_data="action:change_language")],
         [InlineKeyboardButton(text=t(lang, "btn_responsible_gaming"), callback_data="action:responsible_gaming")],
+        [InlineKeyboardButton(text=t(lang, "btn_share_bot"), callback_data="action:share_bot")],
     ]
     return InlineKeyboardMarkup(inline_keyboard=rows)

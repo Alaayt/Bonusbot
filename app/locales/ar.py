@@ -33,6 +33,12 @@ STRINGS = {
     "btn_manager": "👨‍💼 التواصل مع المدير",
     "btn_change_language": "🌐 تغيير اللغة",
     "btn_responsible_gaming": "🔞 اللعب المسؤول",
+    "btn_share_bot": "📤 شارك البوت",
+    "share_bot_caption": (
+        "🤖 مستشار البونصات - بوت ذكي يشرح لك كل عروض وبونصات اللعبة بالتفصيل، يختار لك الأنسب، "
+        "ويسجّلك بالبروموكود VIP10IQ 🎁\n\n"
+        "👇 جرّبه الحين\n{bot_link}"
+    ),
     "btn_back_to_menu": "⬅️ القائمة الرئيسية",
     "btn_full_details": "📄 شرح كامل",
     "btn_has_account": "لدي حساب حالي",

@@ -33,6 +33,12 @@ STRINGS = {
     "btn_manager": "👨‍💼 Contacter le responsable",
     "btn_change_language": "🌐 Changer de langue",
     "btn_responsible_gaming": "🔞 Jeu responsable",
+    "btn_share_bot": "📤 Partager le bot",
+    "share_bot_caption": (
+        "🤖 Conseiller Bonus - un bot intelligent qui explique en détail chaque offre et bonus du jeu, "
+        "choisit la meilleure pour vous, et vous inscrit avec le code promo VIP10IQ 🎁\n\n"
+        "👇 Essayez-le maintenant\n{bot_link}"
+    ),
     "btn_back_to_menu": "⬅️ Menu principal",
     "btn_full_details": "📄 Détails complets",
     "btn_has_account": "J'ai déjà un compte",

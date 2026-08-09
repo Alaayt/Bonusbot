@@ -5,9 +5,10 @@
 """
 
 from aiogram import F, Router
+from aiogram.exceptions import TelegramAPIError
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import CallbackQuery, Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bot.keyboards.common import back_to_menu_keyboard
@@ -67,3 +68,31 @@ async def cmd_manager(message: Message, session: AsyncSession, user: User) -> No
 async def cmd_responsible_gaming(message: Message, user: User) -> None:
     lang = user.language or "ar"
     await message.answer(t(lang, "responsible_gaming_text"), reply_markup=back_to_menu_keyboard(lang))
+
+
+@router.callback_query(F.data == "action:share_bot")
+async def on_share_bot(callback: CallbackQuery, user: User) -> None:
+    """
+    يبعت للمستخدم رسالة جاهزة (صورة البوت + نص ترويجي + رابط) يقدر يفوروردها لأصدقائه -
+    هذي رسالة حقيقية مرسلة من البوت فتظهر مضمونة على أي جهاز، بعكس معاينة رابط t.me
+    داخل المحادثة اللي تعتمد على كاش تيليجرام غير المضمون.
+    """
+    lang = user.language or "ar"
+    bot = callback.bot
+    me = await bot.get_me()
+    bot_link = f"https://t.me/{me.username}"
+    caption = t(lang, "share_bot_caption", bot_link=bot_link)
+
+    photo_file_id = None
+    try:
+        chat_info = await bot.get_chat(me.id)
+        if chat_info.photo:
+            photo_file_id = chat_info.photo.big_file_id
+    except TelegramAPIError:
+        photo_file_id = None
+
+    if photo_file_id:
+        await callback.message.answer_photo(photo=photo_file_id, caption=caption)
+    else:
+        await callback.message.answer(caption)
+    await callback.answer()
