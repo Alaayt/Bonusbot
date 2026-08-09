@@ -67,7 +67,7 @@ async def on_offer_selected(callback: CallbackQuery, session: AsyncSession, user
 
     await log_click(session, callback.from_user.id, slug, "promotion_view")
     text = format_quick_summary(promo, lang)
-    await callback.message.answer(text, reply_markup=full_details_keyboard(lang, slug), parse_mode="Markdown")
+    await callback.message.answer(text, reply_markup=full_details_keyboard(lang, slug), parse_mode="HTML")
     await callback.answer()
 
 
@@ -83,5 +83,5 @@ async def on_offer_full_details(callback: CallbackQuery, session: AsyncSession, 
         return
 
     text = format_full_details(promo, lang)
-    await callback.message.answer(text, parse_mode="Markdown")
+    await callback.message.answer(text, parse_mode="HTML")
     await callback.answer()

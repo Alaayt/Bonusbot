@@ -1,3 +1,5 @@
+import html
+
 from app.promotions.schemas.promotion import Promotion
 
 _LABELS = {
@@ -69,26 +71,32 @@ def _status_label(lang: str, status: str) -> str:
     return _l(lang, f"status_{status}") if f"status_{status}" in _LABELS.get(lang, _LABELS["ar"]) else _l(lang, "status_unknown")
 
 
+def _esc(value: object) -> str:
+    """يهرّب أي قيمة ديناميكية من بيانات العرض قبل حقنها في نص بصيغة HTML لتيليجرام -
+    القيم (روابط، مفاتيح JSON، نصوص حرة) قد تحتوي &/</> فتكسر تحليل التنسيق إن لم تُهرّب."""
+    return html.escape(str(value))
+
+
 def format_quick_summary(promo: Promotion, lang: str) -> str:
     if promo.verification_status == "blocked":
-        return f"*{promo.name(lang)}*\n\n{_l(lang, 'blocked_note')}"
+        return f"<b>{_esc(promo.name(lang))}</b>\n\n{_l(lang, 'blocked_note')}"
 
     name = promo.name(lang)
-    lines = [_l(lang, "quick_intro").format(name=name), ""]
+    lines = [_esc(_l(lang, "quick_intro").format(name=name)), ""]
     lines.append(_status_label(lang, promo.status))
 
     reward = promo.reward or {}
     if reward:
-        lines.append(f"\n*{_l(lang, 'reward')}:* {_summarize_reward(reward)}")
+        lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
 
     if promo.activation_steps:
-        lines.append(f"\n*{_l(lang, 'steps')}:*")
+        lines.append(f"\n<b>{_l(lang, 'steps')}:</b>")
         for i, step in enumerate(promo.activation_steps[:3], 1):
-            lines.append(f"{i}. {step}")
+            lines.append(f"{i}. {_esc(step)}")
 
     min_dep = (promo.deposit_conditions or {}).get("min_deposit_eur")
     if min_dep:
-        lines.append(f"\n*{_l(lang, 'min_deposit')}:* {min_dep} EUR")
+        lines.append(f"\n<b>{_l(lang, 'min_deposit')}:</b> {_esc(min_dep)} EUR")
 
     if promo.verification_status == "partial":
         lines.append(f"\n{_l(lang, 'unverified_note')}")
@@ -98,40 +106,43 @@ def format_quick_summary(promo: Promotion, lang: str) -> str:
 
 def format_full_details(promo: Promotion, lang: str) -> str:
     if promo.verification_status == "blocked":
-        return f"*{promo.name(lang)}*\n\n{_l(lang, 'blocked_note')}\n\n{_l(lang, 'source')}: {promo.source_url}"
+        return (
+            f"<b>{_esc(promo.name(lang))}</b>\n\n{_l(lang, 'blocked_note')}\n\n"
+            f"{_l(lang, 'source')}: {_esc(promo.source_url)}"
+        )
 
     name = promo.name(lang)
-    lines = [f"*{_l(lang, 'full_title').format(name=name)}*", ""]
+    lines = [f"<b>{_esc(_l(lang, 'full_title').format(name=name))}</b>", ""]
     lines.append(_status_label(lang, promo.status))
 
     reward = promo.reward or {}
     if reward:
-        lines.append(f"\n*{_l(lang, 'reward')}:* {_summarize_reward(reward)}")
+        lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
 
     if promo.eligible_countries:
         countries = "الكل / All" if "ALL" in promo.eligible_countries else ", ".join(promo.eligible_countries)
-        lines.append(f"\n*{_l(lang, 'eligibility')}:* {countries}")
+        lines.append(f"\n<b>{_l(lang, 'eligibility')}:</b> {_esc(countries)}")
 
     if promo.activation_steps:
-        lines.append(f"\n*{_l(lang, 'steps')}:*")
+        lines.append(f"\n<b>{_l(lang, 'steps')}:</b>")
         for i, step in enumerate(promo.activation_steps, 1):
-            lines.append(f"{i}. {step}")
+            lines.append(f"{i}. {_esc(step)}")
 
     wagering = promo.wagering_conditions or {}
     if wagering:
-        lines.append(f"\n*{_l(lang, 'wagering')}:* {_summarize_dict(wagering)}")
+        lines.append(f"\n<b>{_l(lang, 'wagering')}:</b> {_esc(_summarize_dict(wagering))}")
 
     expiry = promo.expiry_conditions or {}
     if expiry:
-        lines.append(f"\n*{_l(lang, 'expiry')}:* {_summarize_dict(expiry)}")
+        lines.append(f"\n<b>{_l(lang, 'expiry')}:</b> {_esc(_summarize_dict(expiry))}")
 
     if promo.important_warnings:
-        lines.append(f"\n*{_l(lang, 'warnings')}:*")
+        lines.append(f"\n<b>{_l(lang, 'warnings')}:</b>")
         for w in promo.important_warnings:
-            lines.append(f"⚠️ {w}")
+            lines.append(f"⚠️ {_esc(w)}")
 
-    lines.append(f"\n*{_l(lang, 'source')}:* {promo.source_url}")
-    lines.append(f"*{_l(lang, 'last_checked')}:* {promo.last_checked_at}")
+    lines.append(f"\n<b>{_l(lang, 'source')}:</b> {_esc(promo.source_url)}")
+    lines.append(f"<b>{_l(lang, 'last_checked')}:</b> {_esc(promo.last_checked_at)}")
 
     if promo.verification_status == "partial":
         lines.append(f"\n{_l(lang, 'unverified_note')}")
@@ -148,7 +159,7 @@ def _summarize_reward(reward: dict) -> str:
     if "amount" in reward and reward["amount"]:
         parts.append(str(reward["amount"]))
     if not parts:
-        return reward.get("type", "غير محدد")
+        return reward.get("type", "غير محدد").replace("_", " ")
     return " - ".join(parts)
 
 
@@ -157,5 +168,5 @@ def _summarize_dict(d: dict) -> str:
     for k, v in d.items():
         if v is None or v == "":
             continue
-        parts.append(f"{k}: {v}")
+        parts.append(f"{k.replace('_', ' ')}: {v}")
     return " | ".join(parts) if parts else "غير محدد"
