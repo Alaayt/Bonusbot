@@ -6,6 +6,8 @@ _LABELS = {
     "ar": {
         "quick_intro": "إليك ملخص سريع عن {name}:",
         "reward": "الفائدة",
+        "promo_code": "البروموكود",
+        "promo_code_note": "استخدمه أثناء التسجيل لتفعيل العروض رسميًا من الشركة",
         "steps": "كيفية الاشتراك",
         "min_deposit": "الحد الأدنى للإيداع",
         "status_active": "نشط حاليًا ✅",
@@ -25,6 +27,8 @@ _LABELS = {
     "en": {
         "quick_intro": "Here's a quick summary of {name}:",
         "reward": "Reward",
+        "promo_code": "Promo code",
+        "promo_code_note": "Use it during registration to officially activate offers from the company",
         "steps": "How to join",
         "min_deposit": "Minimum deposit",
         "status_active": "Currently active ✅",
@@ -44,6 +48,8 @@ _LABELS = {
     "fr": {
         "quick_intro": "Voici un résumé rapide de {name} :",
         "reward": "Avantage",
+        "promo_code": "Code promo",
+        "promo_code_note": "Utilisez-le lors de l'inscription pour activer officiellement les offres auprès de l'entreprise",
         "steps": "Comment participer",
         "min_deposit": "Dépôt minimum",
         "status_active": "Actif actuellement ✅",
@@ -89,6 +95,10 @@ def format_quick_summary(promo: Promotion, lang: str) -> str:
     if reward:
         lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
 
+    if promo.promo_code:
+        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo.promo_code)}</code>")
+        lines.append(f"{_l(lang, 'promo_code_note')}")
+
     if promo.activation_steps:
         lines.append(f"\n<b>{_l(lang, 'steps')}:</b>")
         for i, step in enumerate(promo.activation_steps[:3], 1):
@@ -118,6 +128,10 @@ def format_full_details(promo: Promotion, lang: str) -> str:
     reward = promo.reward or {}
     if reward:
         lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
+
+    if promo.promo_code:
+        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo.promo_code)}</code>")
+        lines.append(f"{_l(lang, 'promo_code_note')}")
 
     if promo.eligible_countries:
         countries = "الكل / All" if "ALL" in promo.eligible_countries else ", ".join(promo.eligible_countries)
