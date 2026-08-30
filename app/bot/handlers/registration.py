@@ -24,11 +24,11 @@ async def on_register(callback: CallbackQuery, session: AsyncSession, user: User
     """
     lang = user.language or "ar"
     await update_user(session, user, stage=PlayerStage.READY_TO_REGISTER)
-    await _send_registration_info(callback, session, user, lang)
+    await send_registration_info(callback, session, user, lang)
     await callback.answer()
 
 
-async def _send_registration_info(callback: CallbackQuery, session: AsyncSession, user: User, lang: str, has_account: bool | None = None) -> None:
+async def send_registration_info(callback: CallbackQuery, session: AsyncSession, user: User, lang: str, has_account: bool | None = None) -> None:
     has_account = user.has_existing_account if has_account is None else has_account
 
     lines = []
