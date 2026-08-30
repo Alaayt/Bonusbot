@@ -41,19 +41,19 @@ def back_to_menu_keyboard(lang: str) -> InlineKeyboardMarkup:
     )
 
 
-def offer_summary_keyboard(lang: str, slug: str, affiliate_url: str | None = None) -> InlineKeyboardMarkup:
+def offer_summary_keyboard(lang: str, slug: str, offer_url: str | None = None) -> InlineKeyboardMarkup:
     rows = []
-    if affiliate_url:
-        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_offer"), url=affiliate_url)])
+    if offer_url:
+        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_offer"), url=offer_url)])
     rows.append([InlineKeyboardButton(text=t(lang, "btn_full_details"), callback_data=f"offer_full:{slug}")])
     rows.append([InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
-def offer_full_details_keyboard(lang: str, affiliate_url: str | None = None) -> InlineKeyboardMarkup:
+def offer_full_details_keyboard(lang: str, offer_url: str | None = None) -> InlineKeyboardMarkup:
     rows = []
-    if affiliate_url:
-        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_offer"), url=affiliate_url)])
+    if offer_url:
+        rows.append([InlineKeyboardButton(text=t(lang, "btn_open_offer"), url=offer_url)])
     rows.append([InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 

@@ -27,11 +27,11 @@
   "expiry_conditions": {"validity_days": 5},
   "disqualification_reasons": [],
   "kyc_requirements": [],
-  "important_warnings": ["غير متاحة لحسابات العملات المشفرة", "مرة واحدة فقط لكل حساب وعنوان IP"],
+  "important_warnings": ["غير متاحة لحسابات العملات المشفرة", "مرة واحدة فقط لكل حساب وعنوان IP", "معلّق مؤقتًا بانتظار رابط affiliate رسمي من صاحب المشروع"],
   "faq": [],
   "source_url": "https://1xbet.fi/ar/bonus/casino/promotions/spins_for_subscribe",
   "raw_source_file": "data/raw_sources/spins_for_subscribe.txt",
   "last_checked_at": "2026-08-06",
-  "verification_status": "verified",
+  "verification_status": "blocked",
   "verified_via": "نص كامل أرسله المستخدم يدويًا"
 }

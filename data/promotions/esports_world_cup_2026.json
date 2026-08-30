@@ -34,11 +34,11 @@
   "expiry_conditions": {"map_bonus_credit_hours": 48, "raffle_prize_credit_hours": 48},
   "disqualification_reasons": ["أكثر من حساب لكل عائلة/IP/كمبيوتر", "رهانات مكافأة/ملغاة/مباعة/متقدمة/بالبروموكود/مستردة لا تُحتسب"],
   "kyc_requirements": ["وثيقة هوية أو تحقق هاتفي عند الطلب"],
-  "important_warnings": ["تعارض مصدر: هذا المحتوى وصل عبر رابط chick-point في القائمة الأصلية وليس عبر رابط esports مباشر - راجع chick_point.json للتفاصيل", "18 جدول جوائز منفصل - النص الكامل الحرفي في data/raw_sources/esports_world_cup_2026.txt (ملخص) وسجل المحادثة الأصلي"],
+  "important_warnings": ["تعارض مصدر: هذا المحتوى وصل عبر رابط chick-point في القائمة الأصلية وليس عبر رابط esports مباشر - راجع chick_point.json للتفاصيل", "18 جدول جوائز منفصل - النص الكامل الحرفي في data/raw_sources/esports_world_cup_2026.txt (ملخص) وسجل المحادثة الأصلي", "معلّق مؤقتًا بانتظار رابط affiliate رسمي من صاحب المشروع"],
   "faq": [],
   "source_url": "https://1xbet.fi/ar/promotions/chick-point",
   "raw_source_file": "data/raw_sources/esports_world_cup_2026.txt",
   "last_checked_at": "2026-08-06",
-  "verification_status": "partial",
+  "verification_status": "blocked",
   "verified_via": "نص شبه كامل أرسله المستخدم يدويًا (تم تلخيص جداول الجوائز الـ18 لضخامتها)"
 }

@@ -1,3 +1,5 @@
+import html
+
 from app.promotions.services.formatter import format_full_details, format_quick_summary
 from app.promotions.services.promotion_store import get_promotion
 
@@ -11,7 +13,8 @@ def test_quick_summary_contains_offer_name():
 def test_full_details_contains_source_url():
     promo = get_promotion("first_deposit")
     text = format_full_details(promo, "ar")
-    assert promo.source_url in text
+    # الرابط يظهر مُهرّبًا (HTML-escaped) داخل النص المُرسل لتيليجرام - مثلاً "&" تصير "&amp;"
+    assert html.escape(promo.source_url) in text
 
 
 def test_blocked_offer_summary_does_not_invent_numbers():

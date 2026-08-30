@@ -15,7 +15,7 @@ def test_known_verified_offer_has_expected_fields():
     assert promo.verification_status == "verified"
     assert promo.reward["percentage"] == 100
     assert promo.promo_code == "VIP10IQ"
-    assert promo.source_url.startswith("https://1xbet.fi")
+    assert promo.source_url.startswith("https://reffpa.com")
 
 
 def test_blocked_offer_has_no_invented_data():

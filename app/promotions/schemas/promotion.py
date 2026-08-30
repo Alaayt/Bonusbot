@@ -37,7 +37,6 @@ class Promotion(BaseModel):
     important_warnings: list[str] = []
     faq: list[dict[str, Any]] = []
     source_url: str = ""
-    affiliate_url: str | None = None
     raw_source_file: str | None = None
     last_checked_at: str = ""
     verification_status: str = "unknown"  # verified | partial | blocked

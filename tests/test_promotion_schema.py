@@ -16,7 +16,7 @@ def test_every_json_file_matches_schema_and_has_no_fake_url():
 
         assert promo.slug == file.stem
         if promo.verification_status != "blocked":
-            assert promo.source_url.startswith("https://1xbet.fi"), f"مصدر غير رسمي في {file.name}"
+            assert promo.source_url.startswith("https://reffpa.com"), f"مصدر غير رسمي في {file.name}"
 
         # قاعدة الدقة: لا مبالغ EUR ضمن reward إلا إن كانت مذكورة كأرقام (وليست نصوصًا اختُلقت)
         if "max_amount_eur" in promo.reward:

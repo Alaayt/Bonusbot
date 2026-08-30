@@ -27,7 +27,7 @@
 
 - **ممنوع اختراع أي رقم/تاريخ/شرط غير موجود حرفيًا في النص المصدر.**
 - أي قيمة غير مذكورة صراحة تُترك `null` مع ملاحظة في `important_warnings` أو حقل يحتوي `note_unconfirmed`.
-- `source_url` يجب أن يبدأ بـ `https://1xbet.fi` (يُتحقق منه في `tests/test_promotion_schema.py`).
+- `source_url` يجب أن يبدأ بـ `https://reffpa.com` (رابط affiliate رسمي من صاحب المشروع - يُتحقق منه في `tests/test_promotion_schema.py`).
 - `verification_status`:
   - `verified`: النص الكامل مستلم ومطابق تمامًا لما كُتب في JSON.
   - `partial`: بعض الحقول ناقصة - اذكرها صراحة.
