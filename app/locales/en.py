@@ -116,5 +116,5 @@ STRINGS = {
     "cmd_responsible_desc": "Responsible gaming",
     "cmd_stop_marketing_desc": "Turn off promotional messages",
     "bot_short_description": "Your smart promotions advisor for the game - offers explained, best pick for you, promo code VIP10IQ 🎁",
-    "bot_full_description": "Hi! I'm a smart bot specialized in explaining the game's promotions accurately, helping you pick the right offer, and registering a new account with promo code VIP10IQ. Tap Start to continue 👇",
+    "bot_full_description": "Discover available offers, learn how to register and use promo code VIP10IQ. Choose your language and follow the instructions inside the bot.",
 }
