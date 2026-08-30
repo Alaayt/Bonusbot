@@ -2,7 +2,7 @@ from aiogram import F, Router
 from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.bot.keyboards.common import full_details_keyboard, offers_list_keyboard
+from app.bot.keyboards.common import offer_full_details_keyboard, offer_summary_keyboard, offers_list_keyboard
 from app.bot.nav import send_nav
 from app.database.models.user import User
 from app.database.repositories.promotion_meta_repository import log_click
@@ -67,7 +67,8 @@ async def on_offer_selected(callback: CallbackQuery, session: AsyncSession, user
 
     await log_click(session, callback.from_user.id, slug, "promotion_view")
     text = format_quick_summary(promo, lang)
-    await callback.message.answer(text, reply_markup=full_details_keyboard(lang, slug), parse_mode="HTML")
+    keyboard = offer_summary_keyboard(lang, slug, promo.affiliate_url)
+    await callback.message.answer(text, reply_markup=keyboard, parse_mode="HTML")
     await callback.answer()
 
 
@@ -83,5 +84,6 @@ async def on_offer_full_details(callback: CallbackQuery, session: AsyncSession, 
         return
 
     text = format_full_details(promo, lang)
-    await callback.message.answer(text, parse_mode="HTML")
+    keyboard = offer_full_details_keyboard(lang, promo.affiliate_url)
+    await callback.message.answer(text, reply_markup=keyboard, parse_mode="HTML")
     await callback.answer()

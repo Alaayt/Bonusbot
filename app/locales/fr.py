@@ -53,6 +53,7 @@ STRINGS = {
     "registration_link_missing": "Le lien d'inscription officiel n'est pas encore configuré dans le bot. Contactez le responsable pour l'ajouter — en attendant, vous pouvez vous inscrire manuellement sur le site avec le code promo {promo}.",
     "app_download_label": "Lien de téléchargement de l'application",
     "btn_open_registration": "✅ Ouvrir le lien d'inscription",
+    "btn_open_offer": "✅ Ouvrir l'offre et s'inscrire",
     "btn_open_app_download": "📲 Télécharger l'application",
     "confirm_bonus_after_signup": "Après l'inscription, assurez-vous que le bonus apparaît dans \"Mon compte\" ou sur la page de l'offre avant d'effectuer votre premier dépôt.",
     "profile_completion_intro": "Étape très importante après l'inscription : complétez votre profil dans \"Mon compte\" immédiatement — sans cela, le bonus ne sera pas ajouté automatiquement même si vous déposez.",

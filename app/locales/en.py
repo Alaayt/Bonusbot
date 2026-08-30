@@ -53,6 +53,7 @@ STRINGS = {
     "registration_link_missing": "The official registration link isn't configured in the bot yet. Please contact the manager to add it — meanwhile you can still register manually on the site using the promo code {promo}.",
     "app_download_label": "App download link",
     "btn_open_registration": "✅ Open registration link now",
+    "btn_open_offer": "✅ Open offer and register now",
     "btn_open_app_download": "📲 Download the app now",
     "confirm_bonus_after_signup": "After registering, make sure the bonus appears in your \"My Account\" or the offer page before you make your first deposit.",
     "profile_completion_intro": "Very important step after registering: complete your profile in \"My Account\" right away — without it, the bonus won't be added automatically even if you deposit.",
