@@ -45,7 +45,7 @@ STRINGS = {
     "btn_no_account": "Je n'en ai pas / je veux un nouveau compte",
     "ask_has_account": "Avez-vous déjà un compte pour le jeu, ou souhaitez-vous en créer un nouveau ?",
     "existing_account_needs_new_one": "⚠️ Important : le code promo VIP10IQ et toutes les offres qui y sont liées ne fonctionnent qu'avec un nouveau compte créé avec le code promo lors de l'inscription. Votre compte existant ne peut pas y être rattaché rétroactivement. Si vous souhaitez profiter de ces offres, vous pouvez créer un nouveau compte avec le code promo ci-dessous (en plus de votre compte actuel).",
-    "has_account_reply": "Compris. La plupart des offres de premier dépôt sont réservées aux nouveaux comptes, mais vous êtes éligible à des offres comme {options} sur votre compte actuel. Laquelle vous intéresse ?",
+    "has_account_reply": "Compris. La fonction \"Choisir l'offre qui me convient\" est vraiment pensée pour ceux qui veulent créer un nouveau compte avec le code promo VIP10IQ - la plupart des offres phares (comme le bonus de premier dépôt) sont réservées aux nouveaux comptes. Mais vous restez éligible à d'autres offres sur votre compte actuel - choisissez-en une ci-dessous 👇",
     "no_account_promo_intro": "Parfait ! Pour débloquer toutes les offres (surtout le bonus de premier dépôt), inscrivez un nouveau compte avec ce code promo :",
     "promo_code_label": "Code promo",
     "promo_where_to_enter": "Saisissez-le dans le champ \"Code promo\" lors de l'inscription (avant d'activer le compte).",

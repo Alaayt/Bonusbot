@@ -45,7 +45,7 @@ STRINGS = {
     "btn_no_account": "I don't have one / I want a new account",
     "ask_has_account": "Do you already have an account for the game, or do you want to create a new one?",
     "existing_account_needs_new_one": "⚠️ Important: promo code VIP10IQ and all the offers tied to it only work with a new account created using the promo code at registration. Your existing account can't be linked to it retroactively. If you'd like these offers, you can create a new account with the promo code below (in addition to your existing one).",
-    "has_account_reply": "Got it. Most first-deposit offers are exclusive to new accounts, but you're eligible for offers like {options} on your existing account. Which one interests you?",
+    "has_account_reply": "Got it. The \"Find the right offer for me\" feature is really meant for players wanting to create a new account with promo code VIP10IQ - most flagship offers (like the first-deposit bonus) are exclusive to new accounts. But you're still eligible for a few other offers on your existing account - pick one below 👇",
     "no_account_promo_intro": "Great! To unlock every offer (especially the first deposit bonus), you need to register a new account with this promo code:",
     "promo_code_label": "Promo code",
     "promo_where_to_enter": "Enter it in the \"Promo code\" field during registration (before activating the account).",

@@ -11,13 +11,19 @@ from app.ai.safety.guardrails import (
     detect_profit_guarantee_request,
     scrub_sensitive_data,
 )
-from app.bot.keyboards.common import back_to_menu_keyboard, has_account_keyboard, registration_links_keyboard
+from app.bot.keyboards.common import (
+    back_to_menu_keyboard,
+    has_account_keyboard,
+    offers_list_keyboard,
+    registration_links_keyboard,
+)
 from app.bot.nav import send_nav
 from app.common.config import get_settings
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.conversation_repository import get_recent_messages, log_message
 from app.database.repositories.user_repository import update_user
 from app.locales import t
+from app.promotions.services.promotion_store import get_presentable_promotions
 
 router = Router(name="chat")
 settings = get_settings()
@@ -37,16 +43,29 @@ def _wants_registration_or_app(text: str) -> bool:
     return any(keyword in lowered for keyword in _REGISTRATION_OR_APP_KEYWORDS)
 
 
+def _existing_account_offers(lang: str) -> list[tuple[str, str]]:
+    """العروض اللي ما تحتاج حساب جديد بالبروموكود (new_players_only=False) - هذي فقط
+    اللي منطقي نعرضها لصاحب حساب حالي، بعكس ميزة "اختر العرض المناسب لي" الكاملة
+    اللي مبنية على التوصية الذكية وموجّهة لمن يريد إنشاء حساب جديد."""
+    return [(p.slug, p.name(lang)) for p in get_presentable_promotions() if p.new_players_only is False]
+
+
 @router.callback_query(F.data == "action:find_for_me")
 async def on_find_for_me(callback: CallbackQuery, session: AsyncSession, user: User) -> None:
     """
     نسأل عن حالة الحساب هنا (وليس في مسار التسجيل نفسه) لأنها مفيدة لتخصيص التوصية:
-    مثلاً صاحب حساب حالي يُنصح بعروض تناسب حسابه بجانب تشجيعه على حساب جديد بالبروموكود،
-    بينما التسجيل الفعلي بالبروموكود يبقى دائمًا عبر حساب جديد بغض النظر عن الإجابة هنا.
+    ميزة "اختر العرض المناسب لي" (التوصية الذكية عبر سؤال رياضة/كازينو) مخصصة فعليًا
+    لمن يريد إنشاء حساب جديد بالبروموكود - صاحب حساب حالي يُوجَّه بدلاً منها لقائمة
+    العروض المتوافقة مع حسابه الحالي مباشرة، بدون المرور بأسئلة توصية غير مجدية له.
     """
     lang = user.language or "ar"
     if user.has_existing_account is None:
         await send_nav(callback, user, session, t(lang, "ask_has_account"), has_account_keyboard(lang))
+        await callback.answer()
+        return
+    if user.has_existing_account:
+        items = _existing_account_offers(lang)
+        await send_nav(callback, user, session, t(lang, "has_account_reply"), offers_list_keyboard(lang, items))
         await callback.answer()
         return
     await send_nav(callback, user, session, t(lang, "ask_sport_or_casino"), back_to_menu_keyboard(lang))
@@ -58,6 +77,11 @@ async def on_account_status_for_recommendation(callback: CallbackQuery, session:
     lang = user.language or "ar"
     has_account = callback.data.split(":", 1)[1] == "has"
     await update_user(session, user, has_existing_account=has_account)
+    if has_account:
+        items = _existing_account_offers(lang)
+        await send_nav(callback, user, session, t(lang, "has_account_reply"), offers_list_keyboard(lang, items))
+        await callback.answer()
+        return
     await send_nav(callback, user, session, t(lang, "ask_sport_or_casino"), back_to_menu_keyboard(lang))
     await callback.answer()
 
