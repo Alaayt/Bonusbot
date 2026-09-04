@@ -36,7 +36,7 @@ STRINGS = {
     "btn_share_bot": "📤 Partager le bot",
     "share_bot_caption": (
         "🤖 Conseiller Bonus - un bot intelligent qui explique en détail chaque offre et bonus du jeu, "
-        "choisit la meilleure pour vous, et vous inscrit avec le code promo VIP10IQ 🎁\n\n"
+        "choisit la meilleure pour vous, et vous inscrit avec le code promo ACEWIN991 🎁\n\n"
         "👇 Essayez-le maintenant\n{bot_link}"
     ),
     "btn_back_to_menu": "⬅️ Menu principal",
@@ -44,8 +44,8 @@ STRINGS = {
     "btn_has_account": "J'ai déjà un compte",
     "btn_no_account": "Je n'en ai pas / je veux un nouveau compte",
     "ask_has_account": "Avez-vous déjà un compte pour le jeu, ou souhaitez-vous en créer un nouveau ?",
-    "existing_account_needs_new_one": "⚠️ Important : le code promo VIP10IQ et toutes les offres qui y sont liées ne fonctionnent qu'avec un nouveau compte créé avec le code promo lors de l'inscription. Votre compte existant ne peut pas y être rattaché rétroactivement. Si vous souhaitez profiter de ces offres, vous pouvez créer un nouveau compte avec le code promo ci-dessous (en plus de votre compte actuel).",
-    "has_account_reply": "Compris. La fonction \"Choisir l'offre qui me convient\" est vraiment pensée pour ceux qui veulent créer un nouveau compte avec le code promo VIP10IQ - la plupart des offres phares (comme le bonus de premier dépôt) sont réservées aux nouveaux comptes. Mais vous restez éligible à d'autres offres sur votre compte actuel - choisissez-en une ci-dessous 👇",
+    "existing_account_needs_new_one": "⚠️ Important : le code promo ACEWIN991 et toutes les offres qui y sont liées ne fonctionnent qu'avec un nouveau compte créé avec le code promo lors de l'inscription. Votre compte existant ne peut pas y être rattaché rétroactivement. Si vous souhaitez profiter de ces offres, vous pouvez créer un nouveau compte avec le code promo ci-dessous (en plus de votre compte actuel).",
+    "has_account_reply": "Compris. La fonction \"Choisir l'offre qui me convient\" est vraiment pensée pour ceux qui veulent créer un nouveau compte avec le code promo ACEWIN991 - la plupart des offres phares (comme le bonus de premier dépôt) sont réservées aux nouveaux comptes. Mais vous restez éligible à d'autres offres sur votre compte actuel - choisissez-en une ci-dessous 👇",
     "no_account_promo_intro": "Parfait ! Pour débloquer toutes les offres (surtout le bonus de premier dépôt), inscrivez un nouveau compte avec ce code promo :",
     "promo_code_label": "Code promo",
     "promo_where_to_enter": "Saisissez-le dans le champ \"Code promo\" lors de l'inscription (avant d'activer le compte).",
@@ -77,7 +77,7 @@ STRINGS = {
     "missing_bonus_ask_country_currency": "Votre pays et votre devise ?",
     "missing_bonus_ask_participate_button": "Avez-vous cliqué sur le bouton \"Participer\" sur la page de l'offre (si nécessaire) ?",
     "missing_bonus_ask_selected_before_deposit": "Avez-vous activé les offres de bonus dans les paramètres de votre compte avant de déposer ?",
-    "missing_bonus_ask_promo_entered": "Avez-vous saisi le code promo VIP10IQ lors de l'inscription (si l'offre nécessite un nouveau compte) ?",
+    "missing_bonus_ask_promo_entered": "Avez-vous saisi le code promo ACEWIN991 lors de l'inscription (si l'offre nécessite un nouveau compte) ?",
     "missing_bonus_ask_deposit_time_amount": "Quand avez-vous déposé et pour quel montant environ ? (aucune donnée financière sensible, juste l'heure et le montant approximatif)",
     "missing_bonus_no_certain_fix": "Honnêtement, je ne peux pas garantir la cause exacte à partir d'ici. D'après ce que vous m'avez dit, la raison la plus probable est : {hypothesis}. Pour résoudre cela réellement, je vous mets en relation avec le responsable ou le support officiel.",
     "responsible_gaming_text": (
@@ -98,7 +98,7 @@ STRINGS = {
         "Je suis votre conseiller pour les promotions du jeu - je peux vous aider à :\n"
         "🎁 Expliquer n'importe quelle offre et ses conditions en détail\n"
         "🔎 Choisir la meilleure offre pour vous\n"
-        "✅ Vous inscrire avec le code promo VIP10IQ\n"
+        "✅ Vous inscrire avec le code promo ACEWIN991\n"
         "🛠 Résoudre un problème de bonus non reçu\n"
         "👨‍💼 Vous mettre en relation avec le responsable\n\n"
         "Commandes disponibles :\n"
@@ -116,6 +116,6 @@ STRINGS = {
     "cmd_manager_desc": "Contacter le responsable",
     "cmd_responsible_desc": "Jeu responsable",
     "cmd_stop_marketing_desc": "Désactiver les messages promotionnels",
-    "bot_short_description": "Conseiller promotions du jeu - offres expliquées, meilleur choix pour vous, code promo VIP10IQ 🎁",
-    "bot_full_description": "Découvrez les offres disponibles, apprenez à vous inscrire et à utiliser le code promo VIP10IQ. Choisissez votre langue et suivez les instructions à l'intérieur du bot.",
+    "bot_short_description": "Conseiller promotions du jeu - offres expliquées, meilleur choix pour vous, code promo ACEWIN991 🎁",
+    "bot_full_description": "Découvrez les offres disponibles, apprenez à vous inscrire et à utiliser le code promo ACEWIN991. Choisissez votre langue et suivez les instructions à l'intérieur du bot.",
 }

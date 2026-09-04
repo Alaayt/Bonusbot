@@ -1,5 +1,6 @@
 import html
 
+from app.common.config import get_settings
 from app.promotions.schemas.promotion import Promotion
 
 _LABELS = {
@@ -95,8 +96,9 @@ def format_quick_summary(promo: Promotion, lang: str) -> str:
     if reward:
         lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
 
-    if promo.promo_code:
-        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo.promo_code)}</code>")
+    promo_code = get_settings().promo_code
+    if promo_code:
+        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo_code)}</code>")
         lines.append(f"{_l(lang, 'promo_code_note')}")
 
     if promo.activation_steps:
@@ -129,8 +131,9 @@ def format_full_details(promo: Promotion, lang: str) -> str:
     if reward:
         lines.append(f"\n<b>{_l(lang, 'reward')}:</b> {_esc(_summarize_reward(reward))}")
 
-    if promo.promo_code:
-        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo.promo_code)}</code>")
+    promo_code = get_settings().promo_code
+    if promo_code:
+        lines.append(f"\n🎟 <b>{_l(lang, 'promo_code')}:</b> <code>{_esc(promo_code)}</code>")
         lines.append(f"{_l(lang, 'promo_code_note')}")
 
     if promo.eligible_countries:

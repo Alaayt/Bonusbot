@@ -36,7 +36,7 @@ STRINGS = {
     "btn_share_bot": "📤 Share the bot",
     "share_bot_caption": (
         "🤖 Bonus Advisor - a smart bot that explains every offer and bonus for the game in detail, "
-        "picks the best one for you, and registers you with promo code VIP10IQ 🎁\n\n"
+        "picks the best one for you, and registers you with promo code ACEWIN991 🎁\n\n"
         "👇 Try it now\n{bot_link}"
     ),
     "btn_back_to_menu": "⬅️ Main Menu",
@@ -44,8 +44,8 @@ STRINGS = {
     "btn_has_account": "I have an existing account",
     "btn_no_account": "I don't have one / I want a new account",
     "ask_has_account": "Do you already have an account for the game, or do you want to create a new one?",
-    "existing_account_needs_new_one": "⚠️ Important: promo code VIP10IQ and all the offers tied to it only work with a new account created using the promo code at registration. Your existing account can't be linked to it retroactively. If you'd like these offers, you can create a new account with the promo code below (in addition to your existing one).",
-    "has_account_reply": "Got it. The \"Find the right offer for me\" feature is really meant for players wanting to create a new account with promo code VIP10IQ - most flagship offers (like the first-deposit bonus) are exclusive to new accounts. But you're still eligible for a few other offers on your existing account - pick one below 👇",
+    "existing_account_needs_new_one": "⚠️ Important: promo code ACEWIN991 and all the offers tied to it only work with a new account created using the promo code at registration. Your existing account can't be linked to it retroactively. If you'd like these offers, you can create a new account with the promo code below (in addition to your existing one).",
+    "has_account_reply": "Got it. The \"Find the right offer for me\" feature is really meant for players wanting to create a new account with promo code ACEWIN991 - most flagship offers (like the first-deposit bonus) are exclusive to new accounts. But you're still eligible for a few other offers on your existing account - pick one below 👇",
     "no_account_promo_intro": "Great! To unlock every offer (especially the first deposit bonus), you need to register a new account with this promo code:",
     "promo_code_label": "Promo code",
     "promo_where_to_enter": "Enter it in the \"Promo code\" field during registration (before activating the account).",
@@ -77,7 +77,7 @@ STRINGS = {
     "missing_bonus_ask_country_currency": "Your country and currency?",
     "missing_bonus_ask_participate_button": "Did you press the \"Participate\" button on the offer page (if required)?",
     "missing_bonus_ask_selected_before_deposit": "Did you opt into bonus offers in your account settings before depositing?",
-    "missing_bonus_ask_promo_entered": "Did you enter the promo code VIP10IQ during registration (if the offer requires a new account)?",
+    "missing_bonus_ask_promo_entered": "Did you enter the promo code ACEWIN991 during registration (if the offer requires a new account)?",
     "missing_bonus_ask_deposit_time_amount": "When did you deposit and roughly how much? (no sensitive financial info, just time and approximate amount)",
     "missing_bonus_no_certain_fix": "Honestly, I can't guarantee the exact cause from here. Based on what you've told me, the most likely reason is: {hypothesis}. To actually resolve this, I'll connect you with the manager or official support.",
     "responsible_gaming_text": (
@@ -98,7 +98,7 @@ STRINGS = {
         "I'm your promotions advisor for the game - I can help you with:\n"
         "🎁 Explaining any offer and its terms in detail\n"
         "🔎 Picking the best offer for you\n"
-        "✅ Registering with promo code VIP10IQ\n"
+        "✅ Registering with promo code ACEWIN991\n"
         "🛠 Fixing a missing-bonus issue\n"
         "👨‍💼 Reaching the human manager\n\n"
         "Available commands:\n"
@@ -116,6 +116,6 @@ STRINGS = {
     "cmd_manager_desc": "Contact the manager",
     "cmd_responsible_desc": "Responsible gaming",
     "cmd_stop_marketing_desc": "Turn off promotional messages",
-    "bot_short_description": "Your smart promotions advisor for the game - offers explained, best pick for you, promo code VIP10IQ 🎁",
-    "bot_full_description": "Discover available offers, learn how to register and use promo code VIP10IQ. Choose your language and follow the instructions inside the bot.",
+    "bot_short_description": "Your smart promotions advisor for the game - offers explained, best pick for you, promo code ACEWIN991 🎁",
+    "bot_full_description": "Discover available offers, learn how to register and use promo code ACEWIN991. Choose your language and follow the instructions inside the bot.",
 }
