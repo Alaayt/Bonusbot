@@ -34,7 +34,11 @@ def _user_context_block(lang: str, country_code: str | None, has_account: bool |
         f"- مرحلته الحالية: {stage or 'جديد'}\n"
         f"- البروموكود الرسمي: {settings.promo_code}\n"
         f"- رابط التسجيل الرسمي (AFFILIATE_REGISTRATION_URL): {settings.affiliate_registration_url or 'غير مُعد بعد - أخبر المستخدم أنه يحتاج للتواصل مع المدير'}\n"
-        f"- رابط تحميل التطبيق (APP_DOWNLOAD_URL): {settings.app_download_url or 'غير مُعد بعد'}"
+        f"- رابط تحميل التطبيق (APP_DOWNLOAD_URL): {settings.app_download_url or 'غير مُعد بعد'}\n"
+        f"- حساب المدير على تيليجرام للتواصل المباشر: {settings.manager_telegram or 'غير مُعد بعد'}\n"
+        "- هدية إضافية: أي لاعب يسجّل حسابًا جديدًا بالبروموكود أعلاه يقدر يحصل على هدية 1$ إضافية "
+        "بعد التسجيل - فقط لازم يتواصل مباشرة مع المدير عبر حسابه على تيليجرام أعلاه لاستلامها. "
+        "اقترح هذي الهدية بشكل طبيعي (مو مبالغ فيه) كل ما تشرح خطوات التسجيل أو يسأل اللاعب عنه."
     )
 
 

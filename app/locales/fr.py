@@ -56,6 +56,8 @@ STRINGS = {
     "btn_open_offer": "✅ Ouvrir l'offre et s'inscrire",
     "btn_open_app_download": "📲 Télécharger l'application",
     "confirm_bonus_after_signup": "Après l'inscription, assurez-vous que le bonus apparaît dans \"Mon compte\" ou sur la page de l'offre avant d'effectuer votre premier dépôt.",
+    "gift_dollar_offer": "🎁 Cadeau bonus : après avoir inscrit votre nouveau compte avec le code promo, contactez directement le responsable via le bouton ci-dessous et recevez 1$ supplémentaire !",
+    "btn_contact_manager_gift": "🎁 Contacter et recevoir mon cadeau (1$)",
     "profile_completion_intro": "Étape très importante après l'inscription : complétez votre profil dans \"Mon compte\" immédiatement — sans cela, le bonus ne sera pas ajouté automatiquement même si vous déposez.",
     "profile_completion_steps": (
         "Comment compléter votre profil :\n"

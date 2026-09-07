@@ -56,6 +56,8 @@ STRINGS = {
     "btn_open_offer": "✅ Open offer and register now",
     "btn_open_app_download": "📲 Download the app now",
     "confirm_bonus_after_signup": "After registering, make sure the bonus appears in your \"My Account\" or the offer page before you make your first deposit.",
+    "gift_dollar_offer": "🎁 Bonus gift: after registering your new account with the promo code, contact the manager directly via the button below and get an extra $1 gift!",
+    "btn_contact_manager_gift": "🎁 Contact and get your $1 gift",
     "profile_completion_intro": "Very important step after registering: complete your profile in \"My Account\" right away — without it, the bonus won't be added automatically even if you deposit.",
     "profile_completion_steps": (
         "How to complete your profile:\n"

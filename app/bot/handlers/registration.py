@@ -2,7 +2,7 @@ from aiogram import F, Router
 from aiogram.types import CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.bot.keyboards.common import back_to_menu_keyboard, registration_links_keyboard
+from app.bot.keyboards.common import back_to_menu_keyboard, manager_gift_keyboard, registration_links_keyboard
 from app.common.config import get_settings
 from app.database.models.user import PlayerStage, User
 from app.database.repositories.alert_repository import create_manager_alert
@@ -12,6 +12,14 @@ from app.locales import t
 
 router = Router(name="registration")
 settings = get_settings()
+
+
+def _manager_contact_url(manager_telegram: str) -> str:
+    """يقبل الإعداد بأي صيغة شائعة (@username، username، رابط t.me كامل) ويرجّع رابط t.me صالح."""
+    handle = manager_telegram.strip()
+    if handle.startswith("http://") or handle.startswith("https://"):
+        return handle
+    return f"https://t.me/{handle.lstrip('@')}"
 
 
 @router.callback_query(F.data == "action:register")
@@ -62,6 +70,14 @@ async def send_registration_info(callback: CallbackQuery, session: AsyncSession,
         f"{t(lang, 'confirm_bonus_after_signup')}",
         reply_markup=back_to_menu_keyboard(lang),
     )
+
+    # هدية 1$ إضافية عند التواصل المباشر مع المدير بعد التسجيل - رسالة منفصلة أخيرة
+    # حتى تبرز كحافز إضافي بدل ما تضيع وسط تفاصيل التسجيل وإكمال الملف الشخصي.
+    if settings.manager_telegram:
+        await callback.message.answer(
+            t(lang, "gift_dollar_offer"),
+            reply_markup=manager_gift_keyboard(lang, _manager_contact_url(settings.manager_telegram)),
+        )
 
     await log_click(session, callback.from_user.id, None, "registration_link")
     await create_manager_alert(

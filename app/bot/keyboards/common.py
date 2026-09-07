@@ -74,3 +74,12 @@ def registration_links_keyboard(lang: str, registration_url: str, app_download_u
         rows.append([InlineKeyboardButton(text=t(lang, "btn_open_app_download"), url=app_download_url)])
     rows.append([InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
+
+
+def manager_gift_keyboard(lang: str, manager_url: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text=t(lang, "btn_contact_manager_gift"), url=manager_url)],
+            [InlineKeyboardButton(text=t(lang, "btn_back_to_menu"), callback_data="menu:main")],
+        ]
+    )
