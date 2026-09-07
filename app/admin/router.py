@@ -4,13 +4,15 @@
 و"مراجعة التحديثات" و"الإحصائيات" و"الإعلانات" دون الحاجة لبناء تطبيق ويب منفصل.
 """
 
+import csv
+import io
 from datetime import datetime, timezone
 
 from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import BufferedInputFile, CallbackQuery, Message
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -18,6 +20,7 @@ from app.bot.filters.admin_filter import IsAdmin
 from app.common.config import get_settings
 from app.database.models.conversation import ConversationMessage
 from app.database.models.promotion_meta import AdminCountry, PendingUpdate, PromotionClick, PromotionOverride
+from app.database.models.user import User
 from app.database.repositories.promotion_meta_repository import (
     create_pending_update,
     get_override,
@@ -47,6 +50,7 @@ ADMIN_HELP = (
     "/admin_toggle <slug> - تفعيل/تعطيل عرض\n"
     "/admin_add_country <code> <ar>|<en>|<fr> - إضافة دولة جديدة\n"
     "/admin_broadcast <نص> - إرسال إعلان لكل المستخدمين (يستبعد من طلب إيقاف التسويق)\n"
+    "/admin_users - تصدير قائمة كل المشتركين كملف CSV\n"
 )
 
 
@@ -224,17 +228,13 @@ async def admin_add_country(message: Message, session: AsyncSession) -> None:
 
 @router.message(Command("admin_broadcast"))
 async def admin_broadcast(message: Message, session: AsyncSession) -> None:
-    from sqlalchemy import select as sa_select
-
-    from app.database.models.user import User
-
     parts = (message.text or "").split(maxsplit=1)
     if len(parts) < 2:
         await message.answer("الاستخدام: /admin_broadcast <نص الإعلان>")
         return
     text = parts[1]
 
-    result = await session.execute(sa_select(User).where(User.marketing_opt_out.is_(False)))
+    result = await session.execute(select(User).where(User.marketing_opt_out.is_(False)))
     users = result.scalars().all()
 
     sent = 0
@@ -247,3 +247,39 @@ async def admin_broadcast(message: Message, session: AsyncSession) -> None:
 
     await log_audit(session, message.from_user.id, "broadcast", None, f"sent={sent}/{len(users)}")
     await message.answer(f"تم إرسال الإعلان إلى {sent} من أصل {len(users)} مستخدمًا (استُبعد من طلب إيقاف الرسائل الترويجية).")
+
+
+@router.message(Command("admin_users"))
+async def admin_users_export(message: Message, session: AsyncSession) -> None:
+    result = await session.execute(select(User).order_by(User.created_at))
+    users = result.scalars().all()
+
+    if not users:
+        await message.answer("ما فيه أي مستخدم مسجّل بعد.")
+        return
+
+    buffer = io.StringIO()
+    writer = csv.writer(buffer)
+    writer.writerow([
+        "telegram_id", "username", "first_name", "language", "country_code",
+        "has_existing_account", "stage", "marketing_opt_out", "created_at",
+    ])
+    for u in users:
+        writer.writerow([
+            u.telegram_id,
+            u.username or "",
+            u.first_name or "",
+            u.language or "",
+            u.country_code or "",
+            u.has_existing_account if u.has_existing_account is not None else "",
+            u.stage.value if hasattr(u.stage, "value") else u.stage,
+            u.marketing_opt_out,
+            u.created_at.isoformat() if u.created_at else "",
+        ])
+
+    file_bytes = buffer.getvalue().encode("utf-8-sig")  # BOM حتى يفتح إكسل الملف بترميز صحيح
+    filename = f"bonusbot_users_{datetime.now(timezone.utc):%Y%m%d_%H%M%S}.csv"
+    await message.answer_document(
+        BufferedInputFile(file_bytes, filename=filename),
+        caption=f"📋 {len(users)} مستخدم مسجّل بالبوت.",
+    )
