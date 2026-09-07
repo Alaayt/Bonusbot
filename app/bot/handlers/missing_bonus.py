@@ -115,5 +115,5 @@ def _guess_hypothesis(answers: dict) -> str:
     if any(m in selected for m in negative_markers):
         return "يبدو أنك لم تفعّل الاشتراك في عروض المكافآت بإعدادات حسابك قبل الإيداع"
     if any(m in promo for m in negative_markers):
-        return "يبدو أنك لم تُدخل البروموكود ACEWIN991 أثناء التسجيل، وبعض العروض تتطلب ذلك تحديدًا لحساب جديد"
+        return "يبدو أنك لم تُدخل البروموكود VIPACE1 أثناء التسجيل، وبعض العروض تتطلب ذلك تحديدًا لحساب جديد"
     return "قد يكون السبب مرتبطًا بوسيلة الدفع أو توقيت الإيداع أو مدة إضافة المكافأة المتوقعة"

@@ -10,7 +10,7 @@
   "status": "active",
   "new_players_only": true,
   "promo_code_required": true,
-  "promo_code": "ACEWIN991",
+  "promo_code": "VIPACE1",
   "eligible_countries": ["ALL"],
   "excluded_countries": [],
   "eligible_users": ["new_registered_users"],
@@ -24,7 +24,7 @@
     "currency_note": "EUR أو ما يعادلها بالعملة المحلية - القيمة النهائية تظهر داخل حساب اللاعب بعد اختيار الدولة/العملة"
   },
   "activation_steps": [
-    "التسجيل على موقع اللعبة أو التطبيق باستخدام بروموكود ACEWIN991",
+    "التسجيل على موقع اللعبة أو التطبيق باستخدام بروموكود VIPACE1",
     "إكمال جميع الحقول الشخصية في \"حسابي\" وتفعيل رقم الهاتف",
     "الموافقة على تلقي مكافآت المراهنات الرياضية في إعدادات الحساب",
     "إجراء إيداع لا يقل عن 1 EUR",

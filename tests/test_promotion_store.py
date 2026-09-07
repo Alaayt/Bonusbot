@@ -14,7 +14,7 @@ def test_known_verified_offer_has_expected_fields():
     assert promo is not None
     assert promo.verification_status == "verified"
     assert promo.reward["percentage"] == 100
-    assert promo.promo_code == "ACEWIN991"
+    assert promo.promo_code == "VIPACE1"
     assert promo.source_url.startswith("https://reffpa.com")
 
 

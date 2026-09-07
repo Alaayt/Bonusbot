@@ -20,7 +20,7 @@ class Settings(BaseSettings):
 
     affiliate_registration_url: str = ""
     app_download_url: str = ""
-    promo_code: str = "ACEWIN991"
+    promo_code: str = "VIPACE1"
 
     default_language: str = "ar"
     timezone: str = "UTC"

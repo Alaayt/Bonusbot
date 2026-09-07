@@ -45,7 +45,7 @@ async def on_find_for_me(callback: CallbackQuery, session: AsyncSession, user: U
     ميزة "اختر العرض المناسب لي" (التوصية الذكية عبر سؤال رياضة/كازينو) مخصصة فعليًا
     لمن يريد إنشاء حساب جديد بالبروموكود - صاحب حساب حالي يُوجَّه بدلاً منها لنفس
     مسار التسجيل (send_registration_info) اللي يوضّح ضرورة الحساب الجديد للاستفادة
-    من الاستشارة والبروموكود ACEWIN991، بدل المرور بأسئلة توصية غير مجدية له.
+    من الاستشارة والبروموكود VIPACE1، بدل المرور بأسئلة توصية غير مجدية له.
     """
     lang = user.language or "ar"
     if user.has_existing_account is None:
