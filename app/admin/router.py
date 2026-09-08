@@ -28,11 +28,14 @@ from app.database.repositories.promotion_meta_repository import (
     list_pending_updates,
     log_audit,
 )
+from app.locales import SUPPORTED_LANGUAGES, t
 from app.promotions.services.promotion_store import get_all_promotions, reload_promotions
 
 router = Router(name="admin")
 router.message.filter(IsAdmin())
 router.callback_query.filter(IsAdmin())
+
+_ADMIN_PANEL_BUTTON_TEXTS = {t(lang, "btn_admin_panel") for lang in SUPPORTED_LANGUAGES}
 
 settings = get_settings()
 
@@ -75,6 +78,11 @@ ADMIN_HELP = (
 @router.message(Command("admin"))
 async def admin_help(message: Message) -> None:
     await message.answer(ADMIN_HELP, reply_markup=admin_panel_keyboard(), parse_mode="HTML")
+
+
+@router.message(F.text.in_(_ADMIN_PANEL_BUTTON_TEXTS))
+async def admin_panel_from_persistent_button(message: Message) -> None:
+    await message.answer("<b>🛠 لوحة الإدارة</b>\n\nاختر إجراء 👇", reply_markup=admin_panel_keyboard(), parse_mode="HTML")
 
 
 async def _stats_text(session: AsyncSession) -> str:
