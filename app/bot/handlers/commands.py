@@ -11,6 +11,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.bot.filters.admin_filter import is_admin_id
 from app.bot.keyboards.common import back_to_menu_keyboard
 from app.bot.keyboards.language import language_keyboard
 from app.bot.keyboards.main_menu import main_menu_keyboard
@@ -30,13 +31,13 @@ _PERSISTENT_MENU_BUTTON_TEXTS = {t(lang, "btn_persistent_menu") for lang in SUPP
 @router.message(F.text.in_(_PERSISTENT_MENU_BUTTON_TEXTS))
 async def cmd_menu(message: Message, session: AsyncSession, user: User) -> None:
     lang = user.language or "ar"
-    await send_nav(message, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))
+    await send_nav(message, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
 
 
 @router.message(Command("help"))
 async def cmd_help(message: Message, user: User) -> None:
     lang = user.language or "ar"
-    await message.answer(t(lang, "help_text"), reply_markup=main_menu_keyboard(lang))
+    await message.answer(t(lang, "help_text"), reply_markup=main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
 
 
 @router.message(Command("language"))

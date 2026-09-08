@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.bot.filters.admin_filter import is_admin_id
 from app.bot.keyboards.common import age_confirm_keyboard, country_keyboard
 from app.bot.keyboards.language import language_keyboard
 from app.bot.keyboards.main_menu import main_menu_keyboard
@@ -22,7 +23,11 @@ async def cmd_start(message: Message, state: FSMContext, session: AsyncSession, 
     if user.language and user.country_code and user.age_confirmed_adult:
         name = message.from_user.first_name or ""
         await send_nav(
-            message, user, session, t(user.language, "welcome_message", name=name), main_menu_keyboard(user.language)
+            message,
+            user,
+            session,
+            t(user.language, "welcome_message", name=name),
+            main_menu_keyboard(user.language, is_admin_id(user.telegram_id)),
         )
         await message.answer(t(user.language, "persistent_menu_hint"), reply_markup=persistent_menu_keyboard(user.language))
         return
@@ -37,7 +42,7 @@ async def on_language_chosen(callback: CallbackQuery, state: FSMContext, session
     await callback.message.edit_text(t(lang, "language_set"))
 
     if user.country_code and user.age_confirmed_adult:
-        await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))
+        await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
         await state.clear()
     else:
         await state.set_state(Onboarding.choosing_country)
@@ -59,7 +64,7 @@ async def on_country_chosen(callback: CallbackQuery, state: FSMContext, session:
     await update_user(session, user, country_code=code)
 
     if user.age_confirmed_adult:
-        await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))
+        await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
         await state.clear()
     else:
         await state.set_state(Onboarding.confirming_age)
@@ -73,7 +78,7 @@ async def on_country_typed(message: Message, state: FSMContext, session: AsyncSe
     await update_user(session, user, country_code=(message.text or "OTHER")[:5].upper())
 
     if user.age_confirmed_adult:
-        await send_nav(message, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))
+        await send_nav(message, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
         await state.clear()
     else:
         await state.set_state(Onboarding.confirming_age)
@@ -95,7 +100,7 @@ async def on_age_yes(callback: CallbackQuery, state: FSMContext, session: AsyncS
     await update_user(session, user, age_confirmed_adult=True, stage=PlayerStage.EXPLORING)
     name = callback.from_user.first_name or ""
     await callback.message.edit_text(t(lang, "age_confirm_yes"))
-    await send_nav(callback, user, session, t(lang, "welcome_message", name=name), main_menu_keyboard(lang))
+    await send_nav(callback, user, session, t(lang, "welcome_message", name=name), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
     await callback.message.answer(t(lang, "persistent_menu_hint"), reply_markup=persistent_menu_keyboard(lang))
     await state.clear()
     await callback.answer()
@@ -112,5 +117,5 @@ async def on_change_language(callback: CallbackQuery, state: FSMContext, session
 async def on_back_to_menu(callback: CallbackQuery, state: FSMContext, session: AsyncSession, user: User) -> None:
     lang = user.language or "ar"
     await state.clear()
-    await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang))
+    await send_nav(callback, user, session, t(lang, "main_menu_title"), main_menu_keyboard(lang, is_admin_id(user.telegram_id)))
     await callback.answer()

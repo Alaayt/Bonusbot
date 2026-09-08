@@ -8,11 +8,11 @@ import csv
 import io
 from datetime import datetime, timezone
 
-from aiogram import F, Router
+from aiogram import Bot, F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import BufferedInputFile, CallbackQuery, Message
+from aiogram.types import BufferedInputFile, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -41,6 +41,23 @@ class AdminUpload(StatesGroup):
     waiting_text = State()
 
 
+class AdminPanel(StatesGroup):
+    waiting_broadcast_text = State()
+
+
+def admin_panel_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="📊 إحصائيات", callback_data="admin:stats")],
+            [InlineKeyboardButton(text="🏆 أكثر العروض طلبًا", callback_data="admin:top_offers")],
+            [InlineKeyboardButton(text="📝 التحديثات المعلّقة", callback_data="admin:pending")],
+            [InlineKeyboardButton(text="📢 إرسال إعلان لكل المستخدمين", callback_data="admin:broadcast_start")],
+            [InlineKeyboardButton(text="📋 تصدير قائمة المستخدمين (CSV)", callback_data="admin:export_users")],
+            [InlineKeyboardButton(text="⬅️ رجوع للقائمة الرئيسية", callback_data="menu:main")],
+        ]
+    )
+
+
 ADMIN_HELP = (
     "*لوحة الإدارة*\n\n"
     "/admin_stats - إحصائيات عامة\n"
@@ -56,11 +73,10 @@ ADMIN_HELP = (
 
 @router.message(Command("admin"))
 async def admin_help(message: Message) -> None:
-    await message.answer(ADMIN_HELP, parse_mode="Markdown")
+    await message.answer(ADMIN_HELP, reply_markup=admin_panel_keyboard(), parse_mode="Markdown")
 
 
-@router.message(Command("admin_stats"))
-async def admin_stats(message: Message, session: AsyncSession) -> None:
+async def _stats_text(session: AsyncSession) -> str:
     conv_count = (await session.execute(select(func.count(ConversationMessage.id)))).scalar_one()
     reg_clicks = (
         await session.execute(select(func.count(PromotionClick.id)).where(PromotionClick.click_type == "registration_link"))
@@ -68,18 +84,21 @@ async def admin_stats(message: Message, session: AsyncSession) -> None:
     total_promos = len(get_all_promotions())
     verified = len([p for p in get_all_promotions() if p.verification_status == "verified"])
 
-    await message.answer(
+    return (
         "*إحصائيات عامة*\n\n"
         f"عدد رسائل المحادثات: {conv_count}\n"
         f"نقرات رابط التسجيل: {reg_clicks}\n"
         f"عدد العروض في قاعدة المعرفة: {total_promos}\n"
-        f"عروض موثقة بالكامل: {verified}",
-        parse_mode="Markdown",
+        f"عروض موثقة بالكامل: {verified}"
     )
 
 
-@router.message(Command("admin_top_offers"))
-async def admin_top_offers(message: Message, session: AsyncSession) -> None:
+@router.message(Command("admin_stats"))
+async def admin_stats(message: Message, session: AsyncSession) -> None:
+    await message.answer(await _stats_text(session), parse_mode="Markdown")
+
+
+async def _top_offers_text(session: AsyncSession) -> str | None:
     result = await session.execute(
         select(PromotionClick.slug, func.count(PromotionClick.id).label("cnt"))
         .where(PromotionClick.slug.is_not(None))
@@ -89,22 +108,25 @@ async def admin_top_offers(message: Message, session: AsyncSession) -> None:
     )
     rows = result.all()
     if not rows:
+        return None
+    return "*أكثر العروض طلبًا:*\n\n" + "\n".join(f"{slug}: {cnt}" for slug, cnt in rows)
+
+
+@router.message(Command("admin_top_offers"))
+async def admin_top_offers(message: Message, session: AsyncSession) -> None:
+    text = await _top_offers_text(session)
+    if text is None:
         await message.answer("لا توجد بيانات نقرات بعد.")
         return
-    text = "*أكثر العروض طلبًا:*\n\n" + "\n".join(f"{slug}: {cnt}" for slug, cnt in rows)
     await message.answer(text, parse_mode="Markdown")
 
 
-@router.message(Command("admin_pending"))
-async def admin_pending(message: Message, session: AsyncSession) -> None:
+async def _send_pending(bot: Bot, chat_id: int, session: AsyncSession) -> bool:
     pending = await list_pending_updates(session)
     if not pending:
-        await message.answer("لا توجد تحديثات معلّقة حاليًا.")
-        return
+        return False
     for update in pending[:10]:
         preview = update.new_text[:300] + ("…" if len(update.new_text) > 300 else "")
-        from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
         kb = InlineKeyboardMarkup(
             inline_keyboard=[
                 [
@@ -113,7 +135,20 @@ async def admin_pending(message: Message, session: AsyncSession) -> None:
                 ]
             ]
         )
-        await message.answer(f"*تحديث #{update.id} - {update.slug}*\nالمصدر: {update.source}\n\n{preview}", reply_markup=kb, parse_mode="Markdown")
+        await bot.send_message(
+            chat_id,
+            f"*تحديث #{update.id} - {update.slug}*\nالمصدر: {update.source}\n\n{preview}",
+            reply_markup=kb,
+            parse_mode="Markdown",
+        )
+    return True
+
+
+@router.message(Command("admin_pending"))
+async def admin_pending(message: Message, session: AsyncSession) -> None:
+    has_pending = await _send_pending(message.bot, message.chat.id, session)
+    if not has_pending:
+        await message.answer("لا توجد تحديثات معلّقة حاليًا.")
 
 
 @router.callback_query(F.data.startswith("padm_approve:"))
@@ -226,37 +261,37 @@ async def admin_add_country(message: Message, session: AsyncSession) -> None:
     await message.answer(f"تمت إضافة الدولة {code} بنجاح ✅")
 
 
-@router.message(Command("admin_broadcast"))
-async def admin_broadcast(message: Message, session: AsyncSession) -> None:
-    parts = (message.text or "").split(maxsplit=1)
-    if len(parts) < 2:
-        await message.answer("الاستخدام: /admin_broadcast <نص الإعلان>")
-        return
-    text = parts[1]
-
+async def _run_broadcast(bot: Bot, admin_id: int, session: AsyncSession, text: str) -> tuple[int, int]:
     result = await session.execute(select(User).where(User.marketing_opt_out.is_(False)))
     users = result.scalars().all()
 
     sent = 0
     for u in users:
         try:
-            await message.bot.send_message(u.telegram_id, text)
+            await bot.send_message(u.telegram_id, text)
             sent += 1
         except Exception:  # noqa: BLE001
             continue
 
-    await log_audit(session, message.from_user.id, "broadcast", None, f"sent={sent}/{len(users)}")
-    await message.answer(f"تم إرسال الإعلان إلى {sent} من أصل {len(users)} مستخدمًا (استُبعد من طلب إيقاف الرسائل الترويجية).")
+    await log_audit(session, admin_id, "broadcast", None, f"sent={sent}/{len(users)}")
+    return sent, len(users)
 
 
-@router.message(Command("admin_users"))
-async def admin_users_export(message: Message, session: AsyncSession) -> None:
+@router.message(Command("admin_broadcast"))
+async def admin_broadcast(message: Message, session: AsyncSession) -> None:
+    parts = (message.text or "").split(maxsplit=1)
+    if len(parts) < 2:
+        await message.answer("الاستخدام: /admin_broadcast <نص الإعلان>")
+        return
+    sent, total = await _run_broadcast(message.bot, message.from_user.id, session, parts[1])
+    await message.answer(f"تم إرسال الإعلان إلى {sent} من أصل {total} مستخدمًا (استُبعد من طلب إيقاف الرسائل الترويجية).")
+
+
+async def _build_users_csv(session: AsyncSession) -> tuple[BufferedInputFile, int] | None:
     result = await session.execute(select(User).order_by(User.created_at))
     users = result.scalars().all()
-
     if not users:
-        await message.answer("ما فيه أي مستخدم مسجّل بعد.")
-        return
+        return None
 
     buffer = io.StringIO()
     writer = csv.writer(buffer)
@@ -279,7 +314,67 @@ async def admin_users_export(message: Message, session: AsyncSession) -> None:
 
     file_bytes = buffer.getvalue().encode("utf-8-sig")  # BOM حتى يفتح إكسل الملف بترميز صحيح
     filename = f"bonusbot_users_{datetime.now(timezone.utc):%Y%m%d_%H%M%S}.csv"
-    await message.answer_document(
-        BufferedInputFile(file_bytes, filename=filename),
-        caption=f"📋 {len(users)} مستخدم مسجّل بالبوت.",
-    )
+    return BufferedInputFile(file_bytes, filename=filename), len(users)
+
+
+@router.message(Command("admin_users"))
+async def admin_users_export(message: Message, session: AsyncSession) -> None:
+    export = await _build_users_csv(session)
+    if export is None:
+        await message.answer("ما فيه أي مستخدم مسجّل بعد.")
+        return
+    file, count = export
+    await message.answer_document(file, caption=f"📋 {count} مستخدم مسجّل بالبوت.")
+
+
+@router.callback_query(F.data == "admin:panel")
+async def on_admin_panel(callback: CallbackQuery) -> None:
+    await callback.message.answer("*🛠 لوحة الإدارة*\n\nاختر إجراء 👇", reply_markup=admin_panel_keyboard(), parse_mode="Markdown")
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin:stats")
+async def on_admin_stats(callback: CallbackQuery, session: AsyncSession) -> None:
+    await callback.message.answer(await _stats_text(session), parse_mode="Markdown")
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin:top_offers")
+async def on_admin_top_offers(callback: CallbackQuery, session: AsyncSession) -> None:
+    text = await _top_offers_text(session)
+    await callback.message.answer(text or "لا توجد بيانات نقرات بعد.", parse_mode="Markdown" if text else None)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin:pending")
+async def on_admin_pending(callback: CallbackQuery, session: AsyncSession) -> None:
+    has_pending = await _send_pending(callback.bot, callback.message.chat.id, session)
+    if not has_pending:
+        await callback.message.answer("لا توجد تحديثات معلّقة حاليًا.")
+    await callback.answer()
+
+
+@router.callback_query(F.data == "admin:broadcast_start")
+async def on_admin_broadcast_start(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.set_state(AdminPanel.waiting_broadcast_text)
+    await callback.message.answer("أرسل الآن نص الإعلان اللي تبي توزّعه على كل المستخدمين:")
+    await callback.answer()
+
+
+@router.message(AdminPanel.waiting_broadcast_text)
+async def on_admin_broadcast_text(message: Message, state: FSMContext, session: AsyncSession) -> None:
+    await state.clear()
+    sent, total = await _run_broadcast(message.bot, message.from_user.id, session, message.text or "")
+    await message.answer(f"تم إرسال الإعلان إلى {sent} من أصل {total} مستخدمًا (استُبعد من طلب إيقاف الرسائل الترويجية).")
+
+
+@router.callback_query(F.data == "admin:export_users")
+async def on_admin_export_users(callback: CallbackQuery, session: AsyncSession) -> None:
+    export = await _build_users_csv(session)
+    if export is None:
+        await callback.message.answer("ما فيه أي مستخدم مسجّل بعد.")
+        await callback.answer()
+        return
+    file, count = export
+    await callback.message.answer_document(file, caption=f"📋 {count} مستخدم مسجّل بالبوت.")
+    await callback.answer()

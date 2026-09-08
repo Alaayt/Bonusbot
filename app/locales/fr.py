@@ -34,6 +34,7 @@ STRINGS = {
     "btn_change_language": "🌐 Changer de langue",
     "btn_responsible_gaming": "🔞 Jeu responsable",
     "btn_share_bot": "📤 Partager le bot",
+    "btn_admin_panel": "🛠 Panneau d'administration",
     "share_bot_caption": (
         "🤖 Conseiller Bonus - un bot intelligent qui explique en détail chaque offre et bonus du jeu, "
         "choisit la meilleure pour vous, et vous inscrit avec le code promo VIPACE1 🎁\n\n"

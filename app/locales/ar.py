@@ -34,6 +34,7 @@ STRINGS = {
     "btn_change_language": "🌐 تغيير اللغة",
     "btn_responsible_gaming": "🔞 اللعب المسؤول",
     "btn_share_bot": "📤 شارك البوت",
+    "btn_admin_panel": "🛠 لوحة الإدارة",
     "share_bot_caption": (
         "🤖 مستشار البونصات - بوت ذكي يشرح لك كل عروض وبونصات اللعبة بالتفصيل، يختار لك الأنسب، "
         "ويسجّلك بالبروموكود VIPACE1 🎁\n\n"

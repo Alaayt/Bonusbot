@@ -3,7 +3,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from app.locales import t
 
 
-def main_menu_keyboard(lang: str) -> InlineKeyboardMarkup:
+def main_menu_keyboard(lang: str, is_admin: bool = False) -> InlineKeyboardMarkup:
     rows = [
         [InlineKeyboardButton(text=t(lang, "btn_first_deposit"), callback_data="cat:first_deposit")],
         [InlineKeyboardButton(text=t(lang, "btn_sports"), callback_data="cat:sports")],
@@ -22,4 +22,6 @@ def main_menu_keyboard(lang: str) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text=t(lang, "btn_responsible_gaming"), callback_data="action:responsible_gaming")],
         [InlineKeyboardButton(text=t(lang, "btn_share_bot"), callback_data="action:share_bot")],
     ]
+    if is_admin:
+        rows.append([InlineKeyboardButton(text=t(lang, "btn_admin_panel"), callback_data="admin:panel")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
