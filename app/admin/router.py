@@ -5,6 +5,7 @@
 """
 
 import csv
+import html
 import io
 from datetime import datetime, timezone
 
@@ -59,21 +60,21 @@ def admin_panel_keyboard() -> InlineKeyboardMarkup:
 
 
 ADMIN_HELP = (
-    "*لوحة الإدارة*\n\n"
+    "<b>لوحة الإدارة</b>\n\n"
     "/admin_stats - إحصائيات عامة\n"
     "/admin_top_offers - أكثر العروض طلبًا\n"
     "/admin_pending - مراجعة التحديثات المعلقة\n"
-    "/admin_update_offer <slug> - رفع نص شروط جديد لعرض (يدويًا)\n"
-    "/admin_toggle <slug> - تفعيل/تعطيل عرض\n"
-    "/admin_add_country <code> <ar>|<en>|<fr> - إضافة دولة جديدة\n"
-    "/admin_broadcast <نص> - إرسال إعلان لكل المستخدمين (يستبعد من طلب إيقاف التسويق)\n"
+    "/admin_update_offer [slug] - رفع نص شروط جديد لعرض (يدويًا)\n"
+    "/admin_toggle [slug] - تفعيل/تعطيل عرض\n"
+    "/admin_add_country [code] [ar]|[en]|[fr] - إضافة دولة جديدة\n"
+    "/admin_broadcast [نص] - إرسال إعلان لكل المستخدمين (يستبعد من طلب إيقاف التسويق)\n"
     "/admin_users - تصدير قائمة كل المشتركين كملف CSV\n"
 )
 
 
 @router.message(Command("admin"))
 async def admin_help(message: Message) -> None:
-    await message.answer(ADMIN_HELP, reply_markup=admin_panel_keyboard(), parse_mode="Markdown")
+    await message.answer(ADMIN_HELP, reply_markup=admin_panel_keyboard(), parse_mode="HTML")
 
 
 async def _stats_text(session: AsyncSession) -> str:
@@ -85,7 +86,7 @@ async def _stats_text(session: AsyncSession) -> str:
     verified = len([p for p in get_all_promotions() if p.verification_status == "verified"])
 
     return (
-        "*إحصائيات عامة*\n\n"
+        "<b>إحصائيات عامة</b>\n\n"
         f"عدد رسائل المحادثات: {conv_count}\n"
         f"نقرات رابط التسجيل: {reg_clicks}\n"
         f"عدد العروض في قاعدة المعرفة: {total_promos}\n"
@@ -95,7 +96,7 @@ async def _stats_text(session: AsyncSession) -> str:
 
 @router.message(Command("admin_stats"))
 async def admin_stats(message: Message, session: AsyncSession) -> None:
-    await message.answer(await _stats_text(session), parse_mode="Markdown")
+    await message.answer(await _stats_text(session), parse_mode="HTML")
 
 
 async def _top_offers_text(session: AsyncSession) -> str | None:
@@ -109,7 +110,7 @@ async def _top_offers_text(session: AsyncSession) -> str | None:
     rows = result.all()
     if not rows:
         return None
-    return "*أكثر العروض طلبًا:*\n\n" + "\n".join(f"{slug}: {cnt}" for slug, cnt in rows)
+    return "<b>أكثر العروض طلبًا:</b>\n\n" + "\n".join(f"{html.escape(slug)}: {cnt}" for slug, cnt in rows)
 
 
 @router.message(Command("admin_top_offers"))
@@ -118,7 +119,7 @@ async def admin_top_offers(message: Message, session: AsyncSession) -> None:
     if text is None:
         await message.answer("لا توجد بيانات نقرات بعد.")
         return
-    await message.answer(text, parse_mode="Markdown")
+    await message.answer(text, parse_mode="HTML")
 
 
 async def _send_pending(bot: Bot, chat_id: int, session: AsyncSession) -> bool:
@@ -137,9 +138,10 @@ async def _send_pending(bot: Bot, chat_id: int, session: AsyncSession) -> bool:
         )
         await bot.send_message(
             chat_id,
-            f"*تحديث #{update.id} - {update.slug}*\nالمصدر: {update.source}\n\n{preview}",
+            f"<b>تحديث #{update.id} - {html.escape(update.slug)}</b>\n"
+            f"المصدر: {html.escape(update.source)}\n\n{html.escape(preview)}",
             reply_markup=kb,
-            parse_mode="Markdown",
+            parse_mode="HTML",
         )
     return True
 
@@ -163,7 +165,10 @@ async def approve_pending(callback: CallbackQuery, session: AsyncSession) -> Non
     update.reviewed_at = datetime.now(timezone.utc)
     await session.commit()
     await log_audit(session, callback.from_user.id, "approve_pending_update", update.slug, f"update_id={update_id}")
-    await callback.message.edit_text(callback.message.text + "\n\n✅ تمت الموافقة - يرجى تحديث ملف JSON يدويًا في data/promotions/ بناءً على هذا النص المعتمد ثم استدعاء reload.")
+    await callback.message.edit_text(
+        callback.message.text + "\n\n✅ تمت الموافقة - يرجى تحديث ملف JSON يدويًا في data/promotions/ بناءً على هذا النص المعتمد ثم استدعاء reload.",
+        parse_mode=None,
+    )
     await callback.answer()
 
 
@@ -179,7 +184,7 @@ async def reject_pending(callback: CallbackQuery, session: AsyncSession) -> None
     update.reviewed_at = datetime.now(timezone.utc)
     await session.commit()
     await log_audit(session, callback.from_user.id, "reject_pending_update", update.slug, f"update_id={update_id}")
-    await callback.message.edit_text(callback.message.text + "\n\n❌ تم الرفض.")
+    await callback.message.edit_text(callback.message.text + "\n\n❌ تم الرفض.", parse_mode=None)
     await callback.answer()
 
 
@@ -192,7 +197,7 @@ async def admin_update_offer_start(message: Message, state: FSMContext) -> None:
     slug = parts[1].strip()
     await state.set_state(AdminUpload.waiting_text)
     await state.update_data(slug=slug)
-    await message.answer(f"تمام، أرسل الآن نص الشروط الكامل للعرض `{slug}` (أو ارفع ملف PDF).", parse_mode="Markdown")
+    await message.answer(f"تمام، أرسل الآن نص الشروط الكامل للعرض <code>{html.escape(slug)}</code> (أو ارفع ملف PDF).", parse_mode="HTML")
 
 
 @router.message(AdminUpload.waiting_text, F.document)
@@ -207,7 +212,10 @@ async def admin_update_offer_pdf(message: Message, state: FSMContext, session: A
     text = extract_text_from_pdf_bytes(file_bytes.read())
 
     await create_pending_update(session, slug=slug, new_text=text, source="admin_upload")
-    await message.answer(f"تم استلام ملف PDF لعرض `{slug}` وحفظه كتحديث معلّق بانتظار المراجعة (/admin_pending).", parse_mode="Markdown")
+    await message.answer(
+        f"تم استلام ملف PDF لعرض <code>{html.escape(slug)}</code> وحفظه كتحديث معلّق بانتظار المراجعة (/admin_pending).",
+        parse_mode="HTML",
+    )
     await state.clear()
 
 
@@ -216,7 +224,10 @@ async def admin_update_offer_text(message: Message, state: FSMContext, session: 
     data = await state.get_data()
     slug = data.get("slug")
     await create_pending_update(session, slug=slug, new_text=message.text or "", source="admin_upload")
-    await message.answer(f"تم حفظ النص لعرض `{slug}` كتحديث معلّق بانتظار المراجعة (/admin_pending).", parse_mode="Markdown")
+    await message.answer(
+        f"تم حفظ النص لعرض <code>{html.escape(slug)}</code> كتحديث معلّق بانتظار المراجعة (/admin_pending).",
+        parse_mode="HTML",
+    )
     await state.clear()
 
 
@@ -239,7 +250,10 @@ async def admin_toggle_offer(message: Message, session: AsyncSession) -> None:
 
     await log_audit(session, message.from_user.id, "toggle_offer", slug, f"is_disabled={override.is_disabled}")
     reload_promotions()
-    await message.answer(f"العرض `{slug}` الآن: {'معطّل ❌' if override.is_disabled else 'مفعّل ✅'}", parse_mode="Markdown")
+    await message.answer(
+        f"العرض <code>{html.escape(slug)}</code> الآن: {'معطّل ❌' if override.is_disabled else 'مفعّل ✅'}",
+        parse_mode="HTML",
+    )
 
 
 @router.message(Command("admin_add_country"))
@@ -329,20 +343,20 @@ async def admin_users_export(message: Message, session: AsyncSession) -> None:
 
 @router.callback_query(F.data == "admin:panel")
 async def on_admin_panel(callback: CallbackQuery) -> None:
-    await callback.message.answer("*🛠 لوحة الإدارة*\n\nاختر إجراء 👇", reply_markup=admin_panel_keyboard(), parse_mode="Markdown")
+    await callback.message.answer("<b>🛠 لوحة الإدارة</b>\n\nاختر إجراء 👇", reply_markup=admin_panel_keyboard(), parse_mode="HTML")
     await callback.answer()
 
 
 @router.callback_query(F.data == "admin:stats")
 async def on_admin_stats(callback: CallbackQuery, session: AsyncSession) -> None:
-    await callback.message.answer(await _stats_text(session), parse_mode="Markdown")
+    await callback.message.answer(await _stats_text(session), parse_mode="HTML")
     await callback.answer()
 
 
 @router.callback_query(F.data == "admin:top_offers")
 async def on_admin_top_offers(callback: CallbackQuery, session: AsyncSession) -> None:
     text = await _top_offers_text(session)
-    await callback.message.answer(text or "لا توجد بيانات نقرات بعد.", parse_mode="Markdown" if text else None)
+    await callback.message.answer(text or "لا توجد بيانات نقرات بعد.", parse_mode="HTML" if text else None)
     await callback.answer()
 
 
